@@ -16,7 +16,7 @@ namespace L54E2T_HSZF_2024251.Application
         public ICollection<Projects> GetProjectsByFilter(Func<Projects, bool> filter);
         public ICollection<Projects> GetProjects();
     }
-    public class ProjectService
+    public class ProjectService : IProjectService
     {
         private readonly IProjectDataProvider projectDataProvider;
 

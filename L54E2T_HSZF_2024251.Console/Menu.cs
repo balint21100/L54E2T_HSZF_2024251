@@ -11,6 +11,8 @@ namespace L54E2T_HSZF_2024251.Console2
 {
     public class Menu
     {
+
+        static IProjectService projectService;
         
 
         public Menu()

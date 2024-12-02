@@ -17,23 +17,30 @@ namespace L54E2T_HSZF_2024251.Console2
                             {
                                 services.AddScoped<EgyptDb>();
 
-                                services.AddSingleton<IDataService, DataService>();
-                                services.AddSingleton<IPahraohDataProvider, PharaohDataProvider>();
+                                services.AddSingleton<IPharaohDataProvider, PharaohDataProvider>();
                                 services.AddSingleton<IProjectDataProvider, ProjectDataProvider>();
                                 services.AddSingleton<IWorkerDataProvider, WorkerDataProvider>();
-                                services.AddSingleton<IReport, Report>();
+                                services.AddSingleton<IWorkerRelationshipsDataProvider, WorkerRelationshipsDataProvider>();
+                                services.AddSingleton<IPharaohService, PharaohService>();
+                                services.AddSingleton<IProjectService, ProjectService>();
+                                services.AddSingleton<IWorkerService, WorkerService>();
+                                services.AddSingleton<IWorkerRelationShipService, WorkerRelationShipService>();
+                                
 
 
                             })
                             .Build();
-            using IServiceScope serviceScope = host.Services.CreateScope();
-            IServiceProvider serviceProvider = serviceScope.ServiceProvider;
 
-            IDataService dataService = serviceProvider.GetRequiredService<IDataService>();
 
             host.Start();
+
+            IPharaohService pharaohService = host.Services.CreateScope().ServiceProvider.GetService<IPharaohService>();
+            IProjectService projectService = host.Services.CreateScope().ServiceProvider.GetService<IProjectService>();
+            IWorkerService workerService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerService>();
+            IWorkerRelationShipService relationShipService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerRelationShipService>();
+            
             Menu menu = new Menu();
-            menu.MainMenu(dataService);
+            menu.MainMenu();
 
 
         }

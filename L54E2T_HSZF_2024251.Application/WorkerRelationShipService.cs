@@ -11,12 +11,12 @@ namespace L54E2T_HSZF_2024251.Application
     public interface IWorkerRelationShipService
     {
         public WorkerRelationShip AddWorkerRelationShip(WorkerRelationShip onePharaoh);
-        public void UpdateWorkerRelationShip(int id, WorkerRelationShip pharaohs);
-        public void DeleteWorkerRelationShip(WorkerRelationShip pharaohs);
+        public void UpdateWorkerRelationShip(Workers workers, Workers manager, Workers newManager);
+        public void DeleteWorkerRelationShip(Workers workers, Workers manager);
         public ICollection<WorkerRelationShip> GetWorkerRelationShipByFilter(Func<WorkerRelationShip, bool> filter);
         public ICollection<WorkerRelationShip> GetWorkerRelationShip();
     }
-    public class WorkerRelationShipService
+    public class WorkerRelationShipService : IWorkerRelationShipService
     {
         private readonly IWorkerRelationshipsDataProvider  workerRelationshipsDataProvider;
         public WorkerRelationShipService(IWorkerRelationshipsDataProvider workerRelationshipsDataProvider)
