@@ -10,15 +10,16 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {
     public interface IWorkerDataProvider
     {
-        public bool AddWorker(Workers worker);
+        
         public bool DeleteWorkerFrominDB(Workers worker);
-        public Workers[] SearchWorkerByIdInDB(int workerId);
 
-        public Workers[] SearchWorkerByNameInDB(string workerName);
 
-        public Workers[] SearchWorkerByAgeInDB(int workerAge);
 
-        public Workers[] SearchWorkerByTypeInDB(string workerType);
+
+        public Workers AddWorker(Workers oneworker);
+        public void UpdateWorker(int id, Workers workers);
+        public void DeleteWorker(int id);
+        public ICollection<Workers> GetWorker();
     }
     public class WorkerDataProvider : IWorkerDataProvider
     {
@@ -27,37 +28,46 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         {
             DBContext = egyptDb;
         }
-        public bool AddWorker(Workers worker)
-        {
-            DBContext.Workers.Add(worker);
-            DBContext.SaveChanges();
-            return true;
-        }
+        //public bool AddWorker(Workers worker)
+        //{
+        //    DBContext.Workers.Add(worker);
+        //    DBContext.SaveChanges();
+        //    return true;
+        //}
         public bool DeleteWorkerFrominDB(Workers worker)
         {
             DBContext.Workers.Remove(worker);
             DBContext.SaveChanges();
             return true;
         }
-        public Workers[] SearchWorkerByIdInDB(int workerId)
+        
+
+
+
+
+
+        public Workers AddWorker(Workers oneworker)
         {
-            Workers[] workersWithThisName = DBContext.Workers.Where(x => x.Id == workerId).ToArray();
-            return workersWithThisName;
+            Workers worker = DBContext.Workers.Add(oneworker).Entity;
+            DBContext.SaveChanges();
+            return worker;
         }
-        public Workers[] SearchWorkerByNameInDB(string workerName)
+        public void UpdateWorker(int id, Workers workers)
         {
-            Workers[] workersWithThisName = DBContext.Workers.Where(x => x.Name == workerName).ToArray();
-            return workersWithThisName;
+            Workers newworker = DBContext.Workers.First(x => x.Id == id);
+            workers = newworker;
+            DBContext.SaveChanges();
         }
-        public Workers[] SearchWorkerByAgeInDB(int workerAge)
+        public void DeleteWorker(int id)
         {
-            Workers[] workersWithThisAge = DBContext.Workers.Where(x => x.Age == workerAge).ToArray();
-            return workersWithThisAge;
+            Workers newworker = DBContext.Workers.First(x => x.Id == id);
+            DBContext.Remove(newworker);
+            DBContext.SaveChanges();
         }
-        public Workers[] SearchWorkerByTypeInDB(string workerType)
+        public ICollection<Workers> GetWorker()
         {
-            Workers[] workersWithThisType = DBContext.Workers.Where(x => x.Type == workerType).ToArray();
-            return workersWithThisType;
+            return DBContext.Workers.ToHashSet();
         }
+
     }
 }

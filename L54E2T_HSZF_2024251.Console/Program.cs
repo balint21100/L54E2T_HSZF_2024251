@@ -18,7 +18,7 @@ namespace L54E2T_HSZF_2024251.Console2
                                 services.AddScoped<EgyptDb>();
 
                                 services.AddSingleton<IDataService, DataService>();
-                                services.AddSingleton<IPahraohDataProvider, PahraohDataProvider>();
+                                services.AddSingleton<IPahraohDataProvider, PharaohDataProvider>();
                                 services.AddSingleton<IProjectDataProvider, ProjectDataProvider>();
                                 services.AddSingleton<IWorkerDataProvider, WorkerDataProvider>();
                                 services.AddSingleton<IReport, Report>();
