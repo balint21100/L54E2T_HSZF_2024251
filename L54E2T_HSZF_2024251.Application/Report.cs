@@ -81,7 +81,7 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public void GeneratePharaohReport(int pharaohId)
         {
-            Pharaohs? pharaoh = report.GeneratePharaohReport(pharaohId);
+            WorkerRelationShip? pharaoh = report.GeneratePharaohReport(pharaohId);
 
             if (pharaoh != null)
             {

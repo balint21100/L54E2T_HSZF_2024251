@@ -10,10 +10,10 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {
     public interface IPharaohDataProvider
     {
-        public Pharaohs AddPharaoh(Pharaohs onePharaoh);
-        public void UpdatePharaoh(int id, Pharaohs pharaohs);
+        public WorkerRelationShip AddPharaoh(WorkerRelationShip onePharaoh);
+        public void UpdatePharaoh(int id, WorkerRelationShip pharaohs);
         public void DeletePharaoh(int id);
-        public ICollection<Pharaohs> GetPharaohs();
+        public ICollection<WorkerRelationShip> GetPharaohs();
     }
     public class PharaohDataProvider : IPharaohDataProvider
     {
@@ -23,25 +23,25 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
             DBContext = egyptDb;
         }
         
-        public Pharaohs AddPharaoh(Pharaohs onePharaoh)
+        public WorkerRelationShip AddPharaoh(WorkerRelationShip onePharaoh)
         {
-            Pharaohs pharaohs = DBContext.Pharaohs.Add(onePharaoh).Entity;
+            WorkerRelationShip pharaohs = DBContext.Pharaohs.Add(onePharaoh).Entity;
             DBContext.SaveChanges();
             return pharaohs;
         }
-        public void UpdatePharaoh(int id, Pharaohs pharaohs)
+        public void UpdatePharaoh(int id, WorkerRelationShip pharaohs)
         {
-            Pharaohs newPharaoh = DBContext.Pharaohs.First(x => x.Id == id);
+            WorkerRelationShip newPharaoh = DBContext.Pharaohs.First(x => x.Id == id);
             newPharaoh = pharaohs;
             DBContext.SaveChanges();
         }
         public void DeletePharaoh(int id)
         {
-            Pharaohs newPharaoh = DBContext.Pharaohs.First(x => x.Id == id);
+            WorkerRelationShip newPharaoh = DBContext.Pharaohs.First(x => x.Id == id);
             DBContext.Remove(newPharaoh);
             DBContext.SaveChanges();
         }
-        public ICollection<Pharaohs> GetPharaohs()
+        public ICollection<WorkerRelationShip> GetPharaohs()
         {
             return DBContext.Pharaohs.ToHashSet();
         }

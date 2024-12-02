@@ -10,14 +10,14 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
     public class EgyptDb : DbContext
     {
         
-        public DbSet<Pharaohs> Pharaohs { get; set; }
+        public DbSet<WorkerRelationShip> Pharaohs { get; set; }
         public DbSet<Workers> Workers { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<WorkerRelationShip> WorkerRelations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pharaohs>()
+            modelBuilder.Entity<WorkerRelationShip>()
                 .HasMany(x => x.Projects)
                 .WithOne()
                 .HasForeignKey(x => x.PharaoId)

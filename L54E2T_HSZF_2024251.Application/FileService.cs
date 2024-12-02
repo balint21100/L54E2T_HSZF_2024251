@@ -16,9 +16,9 @@ namespace L54E2T_HSZF_2024251.Application
     [XmlRoot("Data")]
     public class Data
     {
-        [XmlArray("Pharaohs")]
+        [XmlArray("WorkerRelationShip")]
         [XmlArrayItem("Pharaoh")]
-        public List<Pharaohs> Pharaohs { get; set; }
+        public List<WorkerRelationShip> Pharaohs { get; set; }
 
         [XmlArray("Workers")]
         [XmlArrayItem("Worker")]
@@ -44,7 +44,7 @@ namespace L54E2T_HSZF_2024251.Application
                 foreach (var pharaoh in data.Pharaohs)
                 {
 
-                    Pharaohs.Add(pharaoh);
+                    WorkerRelationShip.Add(pharaoh);
 
 
                     foreach (var project in pharaoh.Projects)

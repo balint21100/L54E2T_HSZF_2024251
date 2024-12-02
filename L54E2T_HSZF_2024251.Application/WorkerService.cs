@@ -13,6 +13,7 @@ namespace L54E2T_HSZF_2024251.Application
         public Workers AddWorker(Workers oneworker);
         public void UpdateWorker(int id, Workers workers);
         public void DeleteWorker(Workers worker);
+        public ICollection<Workers> GetWorkersByFilter(Func<Workers, bool> filter);
         public ICollection<Workers> GetWorker();
     }
     public class WorkerService : IWorkerService
@@ -39,6 +40,10 @@ namespace L54E2T_HSZF_2024251.Application
         public ICollection<Workers> GetWorker()
         {
             return workerDataProvider.GetWorker();
+        }
+        public ICollection<Workers> GetWorkersByFilter(Func<Workers, bool> filter)
+        {
+            return workerDataProvider.GetWorker().Where(filter).ToHashSet();
         }
     }
 }

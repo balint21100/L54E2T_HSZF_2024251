@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace L54E2T_HSZF_2024251.Model
 {
-    public class Pharaohs
+    public class WorkerRelationShip
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,7 +13,7 @@ namespace L54E2T_HSZF_2024251.Model
         public virtual ICollection<Projects>? Projects { get; set; }
         public DateTime Reign_Start { get; set; }
         public DateTime Reign_End { get; set; }
-        public Pharaohs()
+        public WorkerRelationShip()
         {
             Projects = new HashSet<Projects>();
         }

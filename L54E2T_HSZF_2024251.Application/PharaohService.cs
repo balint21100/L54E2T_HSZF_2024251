@@ -11,11 +11,11 @@ namespace L54E2T_HSZF_2024251.Application
 {
     public interface IPharaohService
     {
-        public Pharaohs AddPharaoh(Pharaohs onePharaoh);
-        public void UpdatePharaoh(int id, Pharaohs pharaohs);
-        public void DeletePharaoh(Pharaohs pharaohs);
-        public ICollection<Pharaohs> GetPharaohsByFilter(Func<Pharaohs, bool> filter);
-        public ICollection<Pharaohs> GetPharaohs();
+        public WorkerRelationShip AddPharaoh(WorkerRelationShip onePharaoh);
+        public void UpdatePharaoh(int id, WorkerRelationShip pharaohs);
+        public void DeletePharaoh(WorkerRelationShip pharaohs);
+        public ICollection<WorkerRelationShip> GetPharaohsByFilter(Func<WorkerRelationShip, bool> filter);
+        public ICollection<WorkerRelationShip> GetPharaohs();
     }
     public class PharaohService : IPharaohService
     {
@@ -24,23 +24,23 @@ namespace L54E2T_HSZF_2024251.Application
         {
             this.pharaohDataProvider = pharaohDataProvider;
         }
-        public Pharaohs AddPharaoh(Pharaohs onePharaoh)
+        public WorkerRelationShip AddPharaoh(WorkerRelationShip onePharaoh)
         {
             return pharaohDataProvider.AddPharaoh(onePharaoh);
         }
-        public void UpdatePharaoh(int id, Pharaohs pharaohs)
+        public void UpdatePharaoh(int id, WorkerRelationShip pharaohs)
         {
             pharaohDataProvider.UpdatePharaoh(id, pharaohs);
         }
-        public void DeletePharaoh(Pharaohs pharaohs)
+        public void DeletePharaoh(WorkerRelationShip pharaohs)
         {
             pharaohDataProvider.DeletePharaoh(pharaohs.Id);
         }
-        public ICollection<Pharaohs> GetPharaohs()
+        public ICollection<WorkerRelationShip> GetPharaohs()
         {
             return pharaohDataProvider.GetPharaohs();
         }
-        public ICollection<Pharaohs> GetPharaohsByFilter(Func<Pharaohs,bool> filter)
+        public ICollection<WorkerRelationShip> GetPharaohsByFilter(Func<WorkerRelationShip,bool> filter)
         {
             return pharaohDataProvider.GetPharaohs().Where(filter).ToHashSet();
         }

@@ -11,7 +11,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {
     public interface IReport
     {
-        public Pharaohs? GeneratePharaohReport(int pharaohId);
+        public WorkerRelationShip? GeneratePharaohReport(int pharaohId);
         public void Reports();
         public void GenerateAndExportPharaohReports();
         public void GenerateAllReports();
@@ -40,7 +40,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
             //File.WriteAllLines("Report about workers by age", );
             
         }
-        public Pharaohs? GeneratePharaohReport(int pharaohId)
+        public WorkerRelationShip? GeneratePharaohReport(int pharaohId)
         {
             // Lekérdezés a fáraóra és projektjeire
             var pharaoh = DBContext.Pharaohs
@@ -137,7 +137,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 
         
 
-        public void ExportReportsToXml(List<Pharaohs> reports)
+        public void ExportReportsToXml(List<WorkerRelationShip> reports)
         {
             // Alapértelmezett mappa a fáraók riportjainak
             string baseDirectory = "Projects/";
@@ -163,7 +163,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
                 // Fájl elmentése XML formátumban
                 string filePath = Path.Combine(pharaohDirectory, $"Pharaoh{report.Id}");
 
-                var serializer = new XmlSerializer(typeof(Pharaohs));
+                var serializer = new XmlSerializer(typeof(WorkerRelationShip));
                 using (var writer = new StreamWriter(filePath))
                 {
                     serializer.Serialize(writer, report);
@@ -174,7 +174,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         {
             // Lekérjük az adatokat az adatbázisból (itt csak példa lekérdezés)
             var pharaohReports = DBContext.Pharaohs
-                .Select(pharaoh => new Pharaohs
+                .Select(pharaoh => new WorkerRelationShip
                 {
                     Name = pharaoh.Name,
                     Reign_Start = pharaoh.Reign_Start,
@@ -197,7 +197,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         {
             // Lekérdezzük az összes fáraót és az uralkodásuk dátumait
             var pharaohs = DBContext.Pharaohs
-                .Select(pharaoh => new Pharaohs
+                .Select(pharaoh => new WorkerRelationShip
                 {
                     Name = pharaoh.Name,
                     Reign_Start = pharaoh.Reign_Start,
@@ -209,9 +209,9 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
             ExportPharaohReportToXml(pharaohs);
         }
 
-        public void ExportPharaohReportToXml(List<Pharaohs> reports)
+        public void ExportPharaohReportToXml(List<WorkerRelationShip> reports)
         {
-            var serializer = new XmlSerializer(typeof(List<Pharaohs>));
+            var serializer = new XmlSerializer(typeof(List<WorkerRelationShip>));
             using (var writer = new StreamWriter("PharaohReport.xml"))
             {
                 serializer.Serialize(writer, reports);
