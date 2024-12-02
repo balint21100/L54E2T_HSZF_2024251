@@ -24,17 +24,20 @@ namespace L54E2T_HSZF_2024251.Application
             this.workerRelationshipsDataProvider = workerRelationshipsDataProvider;
         }
 
-        public WorkerRelationShip AddWorkerRelationShip(WorkerRelationShip onePharaoh)
+        public WorkerRelationShip AddWorkerRelationShip(WorkerRelationShip workerRelationShip)
         {
-            return workerRelationshipsDataProvider.AddWorkerRelationships(onePharaoh);
+            return workerRelationshipsDataProvider.AddWorkerRelationships(workerRelationShip);
         }
-        public void UpdateWorkerRelationShip(int id, WorkerRelationShip pharaohs)
+        public void UpdateWorkerRelationShip(Workers workers, Workers manager, Workers newManager)
         {
-            workerRelationshipsDataProvider.UpdateWorkerRelationShip(id, pharaohs);
+            WorkerRelationShip wr = workerRelationshipsDataProvider.GetWorkerRelationShip().First(x => x.WorkerId == workers.Id && x.ManagerId == manager.Id);
+            wr.ManagerId = newManager.Id;
+            workerRelationshipsDataProvider.UpdateWorkerRelationShip(wr.Id, wr);
         }
-        public void DeleteWorkerRelationShip(WorkerRelationShip pharaohs)
+        public void DeleteWorkerRelationShip(Workers workers, Workers manager)
         {
-            workerRelationshipsDataProvider.DeleteWorkerRelationShip(pharaohs.Id);
+            int id = workerRelationshipsDataProvider.GetWorkerRelationShip().First(x => x.WorkerId == workers.Id && x.ManagerId == manager.Id).Id;
+            workerRelationshipsDataProvider.DeleteWorkerRelationShip(id);
         }
         public ICollection<WorkerRelationShip> GetWorkerRelationShip()
         {

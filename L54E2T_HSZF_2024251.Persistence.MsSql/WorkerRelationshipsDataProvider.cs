@@ -9,8 +9,8 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {
     public interface IWorkerRelationshipsDataProvider
     {
-        public WorkerRelationShip AddWorkerRelationships(WorkerRelationShip onePharaoh);
-        public void UpdateWorkerRelationShip(int id, WorkerRelationShip pharaohs);
+        public WorkerRelationShip AddWorkerRelationships(WorkerRelationShip oneWorkerRelationShip);
+        public void UpdateWorkerRelationShip(int id, WorkerRelationShip WorkerRelationShip);
         public void DeleteWorkerRelationShip(int id);
         public ICollection<WorkerRelationShip> GetWorkerRelationShip();
     }
