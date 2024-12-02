@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Seed 23.json" />
+    <None Remove="Seed 23.xml" />
+    <None Remove="Seed.json" />
+    <None Remove="Seed.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Seed 23.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Seed 23.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Seed.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Seed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\L54E2T_HSZF_2024251.Application\L54E2T_HSZF_2024251.Application.csproj" />
+    <ProjectReference Include="..\L54E2T_HSZF_2024251.Model\L54E2T_HSZF_2024251.Model.csproj" />
+    <ProjectReference Include="..\L54E2T_HSZF_2024251.Persistence.MsSql\L54E2T_HSZF_2024251.Persistence.MsSql.csproj" />
+  </ItemGroup>
+
+</Project>

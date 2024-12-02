@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Data>
+  <Pharaohs>
+    <Pharaoh>
+      <Name>Ramses II</Name>
+      <Reign_Start>1279-05-31T00:00:00</Reign_Start>
+      <Reign_End>1213-07-31T00:00:00</Reign_End>
+      <Projects>
+        <Project>
+          <Name>Abu Simbel</Name>
+          <Start_date>1264-01-01T00:00:00</Start_date>
+          <End_date>1244-01-01T00:00:00</End_date>
+          <Workers>
+            <Worker>
+              <Name>Amun</Name>
+              <Age>45</Age>
+              <Type>Engineer</Type>
+            </Worker>
+            <Worker>
+              <Name>Ptah</Name>
+              <Age>38</Age>
+              <Type>Architect</Type>
+            </Worker>
+          </Workers>
+        </Project>
+      </Projects>
+    </Pharaoh>
+    <Pharaoh>
+      <Name>Tutankhamun</Name>
+      <Reign_Start>1332-01-01T00:00:00</Reign_Start>
+      <Reign_End>1323-01-01T00:00:00</Reign_End>
+      <Projects>
+        <Project>
+          <Name>Valley of the Kings</Name>
+          <Start_date>1331-01-01T00:00:00</Start_date>
+          <End_date>1323-01-01T00:00:00</End_date>
+          <Workers>
+            <Worker>
+              <Name>Anubis</Name>
+              <Age>29</Age>
+              <Type>Painter</Type>
+            </Worker>
+          </Workers>
+        </Project>
+      </Projects>
+    </Pharaoh>
+  </Pharaohs>
+
+  <Workers>
+    <Worker>
+      <Name>Amun</Name>
+      <Age>45</Age>
+      <Type>Engineer</Type>
+    </Worker>
+    <Worker>
+      <Name>Ptah</Name>
+      <Age>38</Age>
+      <Type>Architect</Type>
+    </Worker>
+    <Worker>
+      <Name>Anubis</Name>
+      <Age>29</Age>
+      <Type>Painter</Type>
+    </Worker>
+  </Workers>
+
+  <WorkerRelationShips>
+    <WorkerRelationShip>
+      <Manager>2</Manager>
+    </WorkerRelationShip>
+    <WorkerRelationShip>
+      <Manager>1</Manager>
+    </WorkerRelationShip>
+  </WorkerRelationShips>
+</Data>
