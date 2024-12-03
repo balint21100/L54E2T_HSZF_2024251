@@ -23,19 +23,19 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         }
         public WorkerRelationShip AddWorkerRelationships(WorkerRelationShip oneWorkerRelationships)
         {
-            WorkerRelationShip workerRelationships = DBContext.WorkerRelations.Add(oneWorkerRelationships).Entity;
+            Pharaohs workerRelationships = DBContext.WorkerRelations.Add(oneWorkerRelationships).Entity;
             DBContext.SaveChanges();
             return workerRelationships;
         }
         public void UpdateWorkerRelationShip(int id, WorkerRelationShip  workerRelationShip)
         {
-            WorkerRelationShip newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
+            Pharaohs newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
             newWorkerRelationShip = workerRelationShip;
             DBContext.SaveChanges();
         }
         public void DeleteWorkerRelationShip(int id)
         {
-            WorkerRelationShip newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
+            Pharaohs newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
             DBContext.Remove(newWorkerRelationShip);
             DBContext.SaveChanges();
         }

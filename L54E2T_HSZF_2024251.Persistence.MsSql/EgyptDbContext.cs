@@ -10,14 +10,14 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
     public class EgyptDb : DbContext
     {
         
-        public DbSet<WorkerRelationShip> Pharaohs { get; set; }
+        public DbSet<Pharaohs> Pharaohs { get; set; }
         public DbSet<Workers> Workers { get; set; }
         public DbSet<Projects> Projects { get; set; }
-        public DbSet<WorkerRelationShip> WorkerRelations { get; set; }
+        public DbSet<Pharaohs> WorkerRelations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<WorkerRelationShip>()
+            modelBuilder.Entity<Pharaohs>()
                 .HasMany(x => x.Projects)
                 .WithOne()
                 .HasForeignKey(x => x.PharaoId)
@@ -30,7 +30,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
             modelBuilder.Entity<Workers>()
                 .HasMany(x => x.subWorkers)
                 .WithMany()
-                .UsingEntity<WorkerRelationShip>(x => x.HasOne<Workers>().WithMany().HasForeignKey(y => y.WorkerId),
+                .UsingEntity<Pharaohs>(x => x.HasOne<Workers>().WithMany().HasForeignKey(y => y.WorkerId),
                                                   z => z.HasOne<Workers>().WithMany().HasForeignKey(q => q.ManagerId));
                 
 

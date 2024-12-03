@@ -10,12 +10,6 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {
     public interface IWorkerDataProvider
     {
-        
-        public bool DeleteWorkerFrominDB(Workers worker);
-
-
-
-
         public Workers AddWorker(Workers oneworker);
         public void UpdateWorker(int id, Workers workers);
         public void DeleteWorker(int id);
@@ -28,24 +22,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         {
             DBContext = egyptDb;
         }
-        //public bool AddWorker(Workers worker)
-        //{
-        //    DBContext.Workers.Add(worker);
-        //    DBContext.SaveChanges();
-        //    return true;
-        //}
-        public bool DeleteWorkerFrominDB(Workers worker)
-        {
-            DBContext.Workers.Remove(worker);
-            DBContext.SaveChanges();
-            return true;
-        }
         
-
-
-
-
-
         public Workers AddWorker(Workers oneworker)
         {
             Workers worker = DBContext.Workers.Add(oneworker).Entity;

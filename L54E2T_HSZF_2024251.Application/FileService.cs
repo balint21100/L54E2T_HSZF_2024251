@@ -16,17 +16,17 @@ namespace L54E2T_HSZF_2024251.Application
     [XmlRoot("Data")]
     public class Data
     {
-        [XmlArray("WorkerRelationShip")]
+        [XmlArray("Pharaohs")]
         [XmlArrayItem("Pharaoh")]
-        public List<WorkerRelationShip> Pharaohs { get; set; }
+        public List<Pharaohs> Pharaohs { get; set; }
 
         [XmlArray("Workers")]
         [XmlArrayItem("Worker")]
         public List<Workers> Workers { get; set; }
 
         [XmlArray("WorkerRelationShips")]
-        [XmlArrayItem("WorkerRelationShip")]
-        public List<WorkerRelationShip> WorkerRelationShips { get; set; }
+        [XmlArrayItem("Pharaohs")]
+        public List<Pharaohs> WorkerRelationShips { get; set; }
     }
     public class FileService
     {
@@ -44,7 +44,7 @@ namespace L54E2T_HSZF_2024251.Application
                 foreach (var pharaoh in data.Pharaohs)
                 {
 
-                    WorkerRelationShip.Add(pharaoh);
+                    Pharaohs.Add(pharaoh);
 
 
                     foreach (var project in pharaoh.Projects)

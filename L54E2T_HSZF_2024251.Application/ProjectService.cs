@@ -10,8 +10,8 @@ namespace L54E2T_HSZF_2024251.Application
 {
     public interface IProjectService
     {
-        public Projects AddProjects(Projects onePharaoh);
-        public void UpdateProjects(int id, Projects pharaohs);
+        public Projects AddProjects(Projects oneProject);
+        public void UpdateProjects(int id, Projects project);
         public void DeleteProjects(Projects projects);
         public ICollection<Projects> GetProjectsByFilter(Func<Projects, bool> filter);
         public ICollection<Projects> GetProjects();
@@ -25,13 +25,13 @@ namespace L54E2T_HSZF_2024251.Application
             this.projectDataProvider = projectDataProvider;
         }
 
-        public Projects AddProjects(Projects onePharaoh)
+        public Projects AddProjects(Projects oneProject)
         {
-            return projectDataProvider.AddProjects(onePharaoh);
+            return projectDataProvider.AddProjects(oneProject);
         }
-        public void UpdateProjects(int id, Projects pharaohs)
+        public void UpdateProjects(int id, Projects project)
         {
-            projectDataProvider.UpdateProjects(id, pharaohs);
+            projectDataProvider.UpdateProjects(id, project);
         }
         public void DeleteProjects(Projects projects)
         {
