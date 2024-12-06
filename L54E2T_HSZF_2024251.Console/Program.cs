@@ -1,5 +1,6 @@
 ﻿using System;
 using L54E2T_HSZF_2024251.Application;
+using L54E2T_HSZF_2024251.Console;
 using L54E2T_HSZF_2024251.Persistence.MsSql;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,9 +39,9 @@ namespace L54E2T_HSZF_2024251.Console2
             IProjectService projectService = host.Services.CreateScope().ServiceProvider.GetService<IProjectService>();
             IWorkerService workerService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerService>();
             IWorkerRelationShipService relationShipService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerRelationShipService>();
-            
-            Menu menu = new Menu();
-            menu.MainMenu();
+            ReportMenu.pharaohService = pharaohService;
+            ReportMenu.workerService = workerService;
+            Menu.MainMenu();
 
 
         }

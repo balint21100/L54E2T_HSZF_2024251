@@ -10,8 +10,8 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
     public interface IWorkerRelationshipsDataProvider
     {
         public WorkerRelationShip AddWorkerRelationships(WorkerRelationShip oneWorkerRelationShip);
-        public void UpdateWorkerRelationShip(int id, WorkerRelationShip WorkerRelationShip);
-        public void DeleteWorkerRelationShip(int id);
+        public void UpdateWorkerRelationShip(int managerid, int workerid, WorkerRelationShip workerRelationShip);
+        public void DeleteWorkerRelationShip(int managerid, int workerid);
         public ICollection<WorkerRelationShip> GetWorkerRelationShip();
     }
     public class WorkerRelationshipsDataProvider : IWorkerRelationshipsDataProvider
@@ -23,19 +23,19 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         }
         public WorkerRelationShip AddWorkerRelationships(WorkerRelationShip oneWorkerRelationships)
         {
-            Pharaohs workerRelationships = DBContext.WorkerRelations.Add(oneWorkerRelationships).Entity;
+            WorkerRelationShip workerRelationships = DBContext.WorkerRelations.Add(oneWorkerRelationships).Entity;
             DBContext.SaveChanges();
             return workerRelationships;
         }
-        public void UpdateWorkerRelationShip(int id, WorkerRelationShip  workerRelationShip)
+        public void UpdateWorkerRelationShip(int managerid,int workerid, WorkerRelationShip  workerRelationShip)
         {
-            Pharaohs newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
+            WorkerRelationShip newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.WorkerId == workerid && x.ManagerId == managerid);
             newWorkerRelationShip = workerRelationShip;
             DBContext.SaveChanges();
         }
-        public void DeleteWorkerRelationShip(int id)
+        public void DeleteWorkerRelationShip(int managerid, int workerid)
         {
-            Pharaohs newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.Id == id);
+            WorkerRelationShip newWorkerRelationShip = DBContext.WorkerRelations.First(x => x.WorkerId == workerid && x.ManagerId == managerid);
             DBContext.Remove(newWorkerRelationShip);
             DBContext.SaveChanges();
         }

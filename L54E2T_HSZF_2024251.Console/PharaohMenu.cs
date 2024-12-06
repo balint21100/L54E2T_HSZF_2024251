@@ -1,4 +1,5 @@
-﻿using System;
+﻿using L54E2T_HSZF_2024251.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,27 @@ namespace L54E2T_HSZF_2024251.Console2
             string pleaseEnter = "Please Enter Pharaoh"; // reusable in other classes i guess
             Console.Write($"{pleaseEnter} name: ");
             pharaohdata[0] = Console.ReadLine(); // need check for string.empty
-            Console.Write($"{pleaseEnter} Regin start date (correct format: YYYY.MM.DD): ");
+            Console.Write($"{pleaseEnter} Reign start date (correct format: YYYY.MM.DD): ");
             pharaohdata[1] = Console.ReadLine(); // need check for date
-            Console.Write($"{pleaseEnter} Regin end date (correct format: YYYY.MM.DD): ");
+            Console.Write($"{pleaseEnter} Reign end date (correct format: YYYY.MM.DD): ");
             pharaohdata[2] = Console.ReadLine(); // need check for date // How to make a pharaoh
-                                                 // call for the pharaoh add method
+            Pharaohs p = new Pharaohs();
+            p.Name = pharaohdata[0];
+            p.Reign_Start = Convert.ToDateTime(pharaohdata[1]);
+            p.Reign_End = Convert.ToDateTime(pharaohdata[2]);
+        }
+        public static List<Action> ExportAction()
+        {
+            List<Action> list = new List<Action>();
+            list.Add(PharaohAddMenu);
+            list.Add(PharaohRemoveMenu);
+            list.Add(PharaohUpdateMenu);
+            list.Add(GetPharaohs);
+            return list;
+        }
+        public static List<string> Titles()
+        {
+
         }
         public static void PharaohUpdateMenu() // 1. what should  and its correct or not
         {
@@ -28,8 +45,8 @@ namespace L54E2T_HSZF_2024251.Console2
                 Console.Clear();
                 Console.WriteLine("Please choose which you want to update");
                 Console.WriteLine($"[0] Pharaoh Name");
-                Console.WriteLine($"[1] Pharaoh regin start date");
-                Console.WriteLine($"[2] Pharaoh regin end date");
+                Console.WriteLine($"[1] Pharaoh reign start date");
+                Console.WriteLine($"[2] Pharaoh reign end date");
                 Console.WriteLine($"[3] Exit");
                 Console.WriteLine();
                 Console.Write("Choice: ");
@@ -53,16 +70,16 @@ namespace L54E2T_HSZF_2024251.Console2
                     break;
                 case 1:
                     Console.Clear();
-                    Console.WriteLine("Please Enter the pharaoh new regin start date (correct format: YYYY.MM.DD)");
+                    Console.WriteLine("Please Enter the pharaoh new reign start date (correct format: YYYY.MM.DD)");
                     Console.WriteLine();
-                    Console.Write($"Pharaoh new regin start date:"); // need check for date
+                    Console.Write($"Pharaoh new reign start date:"); // need check for date
                     answer = Console.ReadLine();
                     break;
                 case 2:
                     Console.Clear();
-                    Console.WriteLine("Please Enter the pharaoh new regin end date (correct format: YYYY.MM.DD)");
+                    Console.WriteLine("Please Enter the pharaoh new reign end date (correct format: YYYY.MM.DD)");
                     Console.WriteLine();
-                    Console.Write($"Pharaoh new regin end date: "); // need check for date
+                    Console.Write($"Pharaoh new reign end date: "); // need check for date
                     answer = Console.ReadLine();
                     break;
             }
@@ -76,6 +93,15 @@ namespace L54E2T_HSZF_2024251.Console2
             Console.WriteLine();
             Console.Write($"Pharaoh id: ");
             id = int.Parse(Console.ReadLine());
+        }
+        public static void GetPharaohs()
+        {
+            Pharaohs[] pharaohs = new Pharaohs[0];
+            Console.WriteLine($"asd  Pharao Id  Pharao Name Pharao Reign Start Date Pharao Reign End Date");
+            for (int i = 0; i < pharaohs.Length; i++)
+            {
+                Console.WriteLine($"[{i}] | {pharaohs[i].Id} {pharaohs[i].Name} {pharaohs[i].Reign_Start} {pharaohs[i].Reign_End}");
+            }
         }
     }
     public class ProjectMenu

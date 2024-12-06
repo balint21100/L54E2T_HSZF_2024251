@@ -33,7 +33,7 @@ namespace L54E2T_HSZF_2024251.Model
         public int PharaoId { get; set; }
         public virtual ICollection<Workers>? Workers { get; set; }
         public int WorkerCount { get { return Workers.Count(); } }
-        public int WorkerValue { get; set; }
+        public TimeSpan ProjectValue { get { return (End_date - Start_date) * WorkerCount / 2; } }
         public Projects()
         {
             Workers = new HashSet<Workers>();
@@ -58,13 +58,15 @@ namespace L54E2T_HSZF_2024251.Model
             subWorkers = new HashSet<Workers>();
         }
     }
+    
     public class WorkerRelationShip
     {
-        
-        [Key,Column(Order = 0)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         public int WorkerId { get; set; }
-        [Key, Column(Order = 0)]
+        
         [Required]
         public int ManagerId { get; set; }
     }

@@ -13,8 +13,8 @@ namespace L54E2T_HSZF_2024251.Application
         public WorkerRelationShip AddWorkerRelationShip(WorkerRelationShip oneWorkerRelationShip);
         public void UpdateWorkerRelationShip(Workers workers, Workers manager, Workers newManager);
         public void DeleteWorkerRelationShip(Workers workers, Workers manager);
-        public ICollection<Pharaohs> GetWorkerRelationShipByFilter(Func<Pharaohs, bool> filter);
-        public ICollection<Pharaohs> GetWorkerRelationShip();
+        public ICollection<WorkerRelationShip> GetWorkerRelationShipByFilter(Func<WorkerRelationShip, bool> filter);
+        public ICollection<WorkerRelationShip> GetWorkerRelationShip();
     }
     public class WorkerRelationShipService : IWorkerRelationShipService
     {
@@ -30,20 +30,21 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public void UpdateWorkerRelationShip(Workers workers, Workers manager, Workers newManager)
         {
-            Pharaohs wr = workerRelationshipsDataProvider.GetWorkerRelationShip().First(x => x.WorkerId == workers.Id && x.ManagerId == manager.Id);
+            WorkerRelationShip wr = workerRelationshipsDataProvider.GetWorkerRelationShip().First(x => x.WorkerId == workers.Id && x.ManagerId == manager.Id);
+            int oldmanagerid = wr.ManagerId;
             wr.ManagerId = newManager.Id;
-            workerRelationshipsDataProvider.UpdateWorkerRelationShip(wr.Id, wr);
+            workerRelationshipsDataProvider.UpdateWorkerRelationShip(oldmanagerid,wr.WorkerId, wr);
         }
         public void DeleteWorkerRelationShip(Workers workers, Workers manager)
         {
-            int id = workerRelationshipsDataProvider.GetWorkerRelationShip().First(x => x.WorkerId == workers.Id && x.ManagerId == manager.Id).Id;
-            workerRelationshipsDataProvider.DeleteWorkerRelationShip(id);
+            
+            workerRelationshipsDataProvider.DeleteWorkerRelationShip(manager.Id, workers.Id);
         }
-        public ICollection<Pharaohs> GetWorkerRelationShip()
+        public ICollection<WorkerRelationShip> GetWorkerRelationShip()
         {
             return workerRelationshipsDataProvider.GetWorkerRelationShip();
         }
-        public ICollection<Pharaohs> GetWorkerRelationShipByFilter(Func<Pharaohs, bool> filter)
+        public ICollection<WorkerRelationShip> GetWorkerRelationShipByFilter(Func<WorkerRelationShip, bool> filter)
         {
             return workerRelationshipsDataProvider.GetWorkerRelationShip().Where(filter).ToHashSet();
         }
