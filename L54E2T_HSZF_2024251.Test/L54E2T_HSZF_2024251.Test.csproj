@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Application\L54E2T_HSZF_2024251.Application.csproj" />
+    <ProjectReference Include="..\L54E2T_HSZF_2024251.Console\L54E2T_HSZF_2024251.Console.csproj" />
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Model\L54E2T_HSZF_2024251.Model.csproj" />
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Persistence.MsSql\L54E2T_HSZF_2024251.Persistence.MsSql.csproj" />
   </ItemGroup>
