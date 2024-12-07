@@ -1,4 +1,6 @@
-﻿using L54E2T_HSZF_2024251.Model;
+﻿using L54E2T_HSZF_2024251.Console;
+using L54E2T_HSZF_2024251.Model;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,41 @@ namespace L54E2T_HSZF_2024251.Console2
         public static void PharaohAddMenu()
         {
             string[] pharaohdata = new string[3];
-            string pleaseEnter = "Please Enter Pharaoh"; // reusable in other classes i guess
-            Console.Write($"{pleaseEnter} name: ");
-            pharaohdata[0] = Console.ReadLine(); // need check for string.empty
-            Console.Write($"{pleaseEnter} Reign start date (correct format: YYYY.MM.DD): ");
-            pharaohdata[1] = Console.ReadLine(); // need check for date
-            Console.Write($"{pleaseEnter} Reign end date (correct format: YYYY.MM.DD): ");
-            pharaohdata[2] = Console.ReadLine(); // need check for date // How to make a pharaoh
+            ///// new tech
+            string pleaseEnter = "Please Enter";
+            string Pharaoh = "Pharaoh ";
+            string name = "name ";
+            string reignStart = "Reign start date (correct format: YYYY.MM.DD): ";
+            string reignEnd = "Reign end date (correct format: YYYY.MM.DD): ";
+
+            pharaohdata[0] = GetInput(pleaseEnter, Pharaoh+name, InputCheckForMenus.StringEmptyCheck); // test approved
+            pharaohdata[1] = GetInput(pleaseEnter, Pharaoh + reignStart, InputCheckForMenus.DateTimeCheck);// test approved
+            pharaohdata[2] = GetInput(pleaseEnter, Pharaoh + reignEnd, InputCheckForMenus.DateTimeCheck);// test approved
+
+
             Pharaohs p = new Pharaohs();
             p.Name = pharaohdata[0];
             p.Reign_Start = Convert.ToDateTime(pharaohdata[1]);
             p.Reign_End = Convert.ToDateTime(pharaohdata[2]);
+        }
+
+        public static string GetInput(string HeadLine, string text, Func<string,bool> requeriment)
+        {
+            string answer = string.Empty;
+            bool correct = false;
+            while (!correct)
+            {
+                System.Console.Clear();
+                System.Console.WriteLine(HeadLine);
+                System.Console.WriteLine();
+                System.Console.Write(text);
+                answer = System.Console.ReadLine();
+                if (requeriment(answer)) 
+                    correct = true;
+            }
+            
+
+            return answer;
         }
         public static List<Action> ExportAction()
         {
@@ -33,7 +59,7 @@ namespace L54E2T_HSZF_2024251.Console2
             list.Add(GetPharaohs);
             return list;
         }
-        public static List<string> Titles()
+        public static List<string> Titles() // show the options
         {
 
         }
