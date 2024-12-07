@@ -17,7 +17,7 @@ namespace L54E2T_HSZF_2024251.Console
         {
             int choice = -1;
             string answer = string.Empty;
-            while (choice != 3)
+            while ((choice != 3))
             {
                 do
                 {
@@ -26,6 +26,8 @@ namespace L54E2T_HSZF_2024251.Console
                     System.Console.WriteLine($"[1] Project");
                     System.Console.WriteLine($"[2] Worker");
                     System.Console.WriteLine($"[3] Exit");
+                    System.Console.WriteLine();
+                    System.Console.Write("Choice: ");
                     answer = System.Console.ReadLine();
                     if (InputCheckForMenus.IntChecker(answer))
                     {
@@ -47,6 +49,9 @@ namespace L54E2T_HSZF_2024251.Console
                     case 1:
                         SubMenu("Project");
                         break;
+                    case 2:
+                        SubMenuWorkers("Worker");
+                        break;
                 }
             }
 
@@ -56,7 +61,7 @@ namespace L54E2T_HSZF_2024251.Console
         {
             int choice = -1;
             string answer = string.Empty;
-            while (choice != 4)
+            while (choice < 0 || choice > 4)
             {
                 System.Console.Clear();
                 System.Console.WriteLine($"{Name} Menu");
@@ -73,7 +78,7 @@ namespace L54E2T_HSZF_2024251.Console
                 {
                     if (answer == "exit")
                     {
-                        choice = 3;
+                        choice = 4;
                     }
                     else
                     {
@@ -88,13 +93,13 @@ namespace L54E2T_HSZF_2024251.Console
                     case 0:
                         PharaohMenu.PharaohAddMenu();
                         break;
-                        case 1:
+                    case 1:
                         PharaohMenu.PharaohUpdate();
                         break;
-                        case 2:
+                    case 2:
                         PharaohMenu.PharaohRemoveMenu();
                         break;
-                        case 3:
+                    case 3:
                         PharaohMenu.GetPharaohs();
                         break;
                 }
@@ -118,7 +123,55 @@ namespace L54E2T_HSZF_2024251.Console
                 }
             }
         }
+        public static void SubMenuWorkers(string Name)
+        {
+            int choice = -1;
+            string answer = string.Empty;
+            while (choice < 0 || choice > 4)
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"{Name} Menu");
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"[0] | Add new {Name}");
+                System.Console.WriteLine($"[1] | Update {Name}");
+                System.Console.WriteLine($"[2] | Delete {Name}");
+                System.Console.WriteLine($"[3] | Get all the {Name}s");
+                System.Console.WriteLine($"[4] | Exit");
+                System.Console.WriteLine();
+                System.Console.Write("choice: ");
+                answer = System.Console.ReadLine();
+                if (InputCheckForMenus.IntChecker(answer))
+                {
+                    if (answer == "exit")
+                    {
+                        choice = 4;
+                    }
+                    else
+                    {
+                        choice = Convert.ToInt32(answer);
+                    }
+                }
+            }
+
+            switch (choice)
+            {
+                case 0:
+                    WorkerMenu.WorkerAddMenu();
+                    break;
+                case 1:
+                    WorkerMenu.WorkerUpdate();
+                    break;
+                case 2:
+                    WorkerMenu.WorkerRemoveMenu();
+                    break;
+                case 3:
+                    WorkerMenu.GetWorkers();
+                    break;
+            }
+
 
         }
+
+
     }
 }

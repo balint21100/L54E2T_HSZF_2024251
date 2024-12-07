@@ -46,5 +46,10 @@ namespace L54E2T_HSZF_2024251.Console
             
 
         }
+        public static void PharaohsByTime()
+        {
+            Dictionary<int,List<Pharaohs>> pharaohs = new Dictionary<int, List<Pharaohs>>();
+
+        }
     }
 }

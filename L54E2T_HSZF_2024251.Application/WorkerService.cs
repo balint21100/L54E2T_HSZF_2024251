@@ -27,14 +27,26 @@ namespace L54E2T_HSZF_2024251.Application
 
         public Workers AddWorker(Workers oneworker)
         {
+            if (oneworker.Age > 59)
+            {
+                throw new ArgumentException("The worker too old. ");
+            }
             return workerDataProvider.AddWorker(oneworker);
         }
         public void UpdateWorker(int id, Workers workers)
         {
+            if (workers.Age > 59)
+            {
+                throw new ArgumentException("The worker too old.");
+            }
             workerDataProvider.UpdateWorker(id, workers);
         }
         public void DeleteWorker(Workers worker)
         {
+            if (worker == null)
+            {
+                throw new ArgumentException("Worker not found");
+            }
             workerDataProvider.DeleteWorker(worker.Id);
         }
         public ICollection<Workers> GetWorker()
