@@ -19,10 +19,12 @@ namespace L54E2T_HSZF_2024251.Application
     public class ProjectService : IProjectService
     {
         private readonly IProjectDataProvider projectDataProvider;
+        private readonly IPharaohDataProvider pharaohDataProvider;
 
-        public ProjectService(IProjectDataProvider projectDataProvider)
+        public ProjectService(IProjectDataProvider projectDataProvider, IPharaohDataProvider pharaohDataProvider)
         {
             this.projectDataProvider = projectDataProvider;
+            this.pharaohDataProvider = pharaohDataProvider;
         }
 
         public Projects AddProjects(Projects oneProject)
@@ -31,6 +33,10 @@ namespace L54E2T_HSZF_2024251.Application
             {
                 throw new ArgumentException("Error! The start date is must be before the end date.");
             }
+            if (!pharaohDataProvider.GetPharaohs().Any(x => x.Id == oneProject.PharaoId))
+            {
+                throw new ArgumentException("Error! Pharaoh not found.");
+            }
             return projectDataProvider.AddProjects(oneProject);
         }
         public void UpdateProjects(int id, Projects project)
@@ -38,6 +44,10 @@ namespace L54E2T_HSZF_2024251.Application
             if (project.Start_date > project.End_date)
             {
                 throw new ArgumentException("Error! The start date is must be before the end date.");
+            }
+            if (!pharaohDataProvider.GetPharaohs().Any(x => x.Id == project.PharaoId))
+            {
+                throw new ArgumentException("Error! Pharaoh not found.");
             }
             projectDataProvider.UpdateProjects(id, project);
         }

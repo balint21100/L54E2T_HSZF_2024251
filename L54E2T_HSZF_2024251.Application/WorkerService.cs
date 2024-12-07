@@ -19,14 +19,20 @@ namespace L54E2T_HSZF_2024251.Application
     public class WorkerService : IWorkerService
     {
         private readonly IWorkerDataProvider workerDataProvider;
+        private readonly IProjectDataProvider projectDataProvider;
 
-        public WorkerService(IWorkerDataProvider workerDataProvider)
+        public WorkerService(IWorkerDataProvider workerDataProvider, IProjectDataProvider projectDataProvider)
         {
             this.workerDataProvider = workerDataProvider;
+            this.projectDataProvider = projectDataProvider;
         }
 
         public Workers AddWorker(Workers oneworker)
         {
+            if (!projectDataProvider.GetProjects().Any(x => x.Id == oneworker.ProjectId))
+            {
+                throw new ArgumentException("Error! Project not found.");
+            }
             if (oneworker.Age > 59)
             {
                 throw new ArgumentException("The worker too old. ");
@@ -35,6 +41,10 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public void UpdateWorker(int id, Workers workers)
         {
+            if (!projectDataProvider.GetProjects().Any(x => x.Id == workers.ProjectId))
+            {
+                throw new ArgumentException("Error! Project not found.");
+            }
             if (workers.Age > 59)
             {
                 throw new ArgumentException("The worker too old.");

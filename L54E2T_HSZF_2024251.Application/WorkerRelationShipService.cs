@@ -44,6 +44,11 @@ namespace L54E2T_HSZF_2024251.Application
             {
                 throw new ArgumentException("Error! The manager is found in subworkers");
             }*/
+            WorkerRelationShip? wr = workerRelationshipsDataProvider.GetWorkerRelationShip().FirstOrDefault(x => x.WorkerId == workers.Id);
+            if (wr != null)
+            {
+                workerRelationshipsDataProvider.DeleteWorkerRelationShip(wr.ManagerId, wr.WorkerId);
+            }
             return workerRelationshipsDataProvider.AddWorkerRelationships(workerRelationShip);
         }
         private bool ManagerFoundInSubWorkers(Workers worker, int managerid)
