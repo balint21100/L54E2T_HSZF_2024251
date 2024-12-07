@@ -42,6 +42,7 @@ namespace L54E2T_HSZF_2024251.Console
             ReportMenu.pharaohService = pharaohService;
             ReportMenu.workerService = workerService;
             PharaohMenu.pharaohService = pharaohService;
+            ProjectMenu.projectService = projectService;
             pharaohService.AddPharaoh(new Model.Pharaohs
             {
                 Name = "Ramses",

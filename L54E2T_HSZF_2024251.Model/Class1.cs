@@ -42,6 +42,10 @@ namespace L54E2T_HSZF_2024251.Model
         {
             Workers = new HashSet<Workers>();
         }
+        public override string ToString()
+        {
+            return $"{Id} | {Name} | {Start_date.ToShortDateString()} | {End_date.ToShortDateString()} | {PharaoId}";
+        }
     }
     public class Workers
     {
@@ -60,6 +64,10 @@ namespace L54E2T_HSZF_2024251.Model
         public Workers()
         {
             subWorkers = new HashSet<Workers>();
+        }
+        public override string ToString()
+        {
+            return $"{Id} | {Name} | {Age} | {Type} | {ProjectId}";
         }
     }
     

@@ -130,7 +130,7 @@ namespace L54E2T_HSZF_2024251.Console
 
 
         //}
-        public static void PharaohUpdateOptionsMenu2()
+        public static void PharaohUpdate()
         {
             string pharaohId = string.Empty;
             Pharaohs oldpharaoh = null;

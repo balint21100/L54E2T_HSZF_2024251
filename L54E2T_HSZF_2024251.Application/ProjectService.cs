@@ -27,14 +27,26 @@ namespace L54E2T_HSZF_2024251.Application
 
         public Projects AddProjects(Projects oneProject)
         {
+            if (oneProject.Start_date > oneProject.End_date)
+            {
+                throw new ArgumentException("Error! The start date is must be before the end date.");
+            }
             return projectDataProvider.AddProjects(oneProject);
         }
         public void UpdateProjects(int id, Projects project)
         {
+            if (project.Start_date > project.End_date)
+            {
+                throw new ArgumentException("Error! The start date is must be before the end date.");
+            }
             projectDataProvider.UpdateProjects(id, project);
         }
         public void DeleteProjects(Projects projects)
         {
+            if (projects == null)
+            {
+                throw new ArgumentException("Project not found");
+            }
             projectDataProvider.DeleteProjects(projects.Id);
         }
         public ICollection<Projects> GetProjectsByFilter(Func<Projects, bool> filter)

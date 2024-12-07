@@ -16,25 +16,108 @@ namespace L54E2T_HSZF_2024251.Console
         public static void MainMenu()
         {
             int choice = -1;
-            do
+            string answer = string.Empty;
+            while (choice != 3)
             {
-                System.Console.Clear();
-                System.Console.WriteLine($"[0] Pharaoh");
-                System.Console.WriteLine($"[1] Project");
-                System.Console.WriteLine($"[2] Worker");
-                choice = int.Parse(System.Console.ReadLine());
-            } while (choice < 0 || choice > 3);
-            switch (choice)
-            {
-                case 0:
-                    PharaohMenu.GetPharaohs();
-                    PharaohMenu.PharaohAddMenu();
-                    PharaohMenu.PharaohRemoveMenu();
-                    PharaohMenu.PharaohUpdateOptionsMenu2();
-                    PharaohMenu.GetPharaohs();
-                    break;
+                do
+                {
+                    System.Console.Clear();
+                    System.Console.WriteLine($"[0] Pharaoh");
+                    System.Console.WriteLine($"[1] Project");
+                    System.Console.WriteLine($"[2] Worker");
+                    System.Console.WriteLine($"[3] Exit");
+                    answer = System.Console.ReadLine();
+                    if (InputCheckForMenus.IntChecker(answer))
+                    {
+                        if (answer == "exit")
+                        {
+                            choice = 3;
+                        }
+                        else
+                        {
+                            choice = Convert.ToInt32(answer);
+                        }
+                    }
+                } while (choice < 0 || choice > 3);
+                switch (choice)
+                {
+                    case 0:
+                        SubMenu("Pharaoh");
+                        break;
+                    case 1:
+                        SubMenu("Project");
+                        break;
+                }
             }
 
+
+        }
+        public static void SubMenu(string Name)
+        {
+            int choice = -1;
+            string answer = string.Empty;
+            while (choice != 4)
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"{Name} Menu");
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"[0] | Add new {Name}");
+                System.Console.WriteLine($"[1] | Update {Name}");
+                System.Console.WriteLine($"[2] | Delete {Name}");
+                System.Console.WriteLine($"[3] | Get all the {Name}s");
+                System.Console.WriteLine($"[4] | Exit");
+                System.Console.WriteLine();
+                System.Console.Write("choice: ");
+                answer = System.Console.ReadLine();
+                if (InputCheckForMenus.IntChecker(answer))
+                {
+                    if (answer == "exit")
+                    {
+                        choice = 3;
+                    }
+                    else
+                    {
+                        choice = Convert.ToInt32(answer);
+                    }
+                }
+            }
+            if (Name == "Pharaoh")
+            {
+                switch (choice)
+                {
+                    case 0:
+                        PharaohMenu.PharaohAddMenu();
+                        break;
+                        case 1:
+                        PharaohMenu.PharaohUpdate();
+                        break;
+                        case 2:
+                        PharaohMenu.PharaohRemoveMenu();
+                        break;
+                        case 3:
+                        PharaohMenu.GetPharaohs();
+                        break;
+                }
+            }
+            else if (Name == "Project")
+            {
+                switch (choice)
+                {
+                    case 0:
+                        ProjectMenu.ProjectAddMenu();
+                        break;
+                    case 1:
+                        ProjectMenu.ProjectUpdate();
+                        break;
+                    case 2:
+                        ProjectMenu.ProjectRemoveMenu();
+                        break;
+                    case 3:
+                        ProjectMenu.GetProjects();
+                        break;
+                }
+            }
+        }
 
         }
     }
