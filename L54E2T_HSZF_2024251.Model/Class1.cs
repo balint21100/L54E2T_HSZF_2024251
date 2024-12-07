@@ -17,6 +17,10 @@ namespace L54E2T_HSZF_2024251.Model
         {
             Projects = new HashSet<Projects>();
         }
+        public override string ToString()
+        {
+            return $"{Id} | {Name} | {Reign_Start.ToShortDateString()} | {Reign_End.ToShortDateString()}";
+        }
     }
     public class Projects
     {

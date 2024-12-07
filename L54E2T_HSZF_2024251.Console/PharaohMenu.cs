@@ -9,10 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace L54E2T_HSZF_2024251.Console2
+namespace L54E2T_HSZF_2024251.Console
 {
-    public class PharaohMenu
+    public static class PharaohMenu
     {
+        
+        public static IPharaohService pharaohService;
         //kinda finished
         public static void PharaohAddMenu()
         {
@@ -36,6 +38,17 @@ namespace L54E2T_HSZF_2024251.Console2
                 p.Name = pharaohdata[0];
                 p.Reign_Start = Convert.ToDateTime(pharaohdata[1]);
                 p.Reign_End = Convert.ToDateTime(pharaohdata[2]);
+                try
+                {
+                    pharaohService.AddPharaoh(p);
+                }
+                catch (ArgumentException e)
+                {
+                    System.Console.Clear();
+                    System.Console.WriteLine($"{e.Message} Please try again");
+                    Task.Delay(3000).Wait();
+                }
+                
             }
             
         }
@@ -62,14 +75,14 @@ namespace L54E2T_HSZF_2024251.Console2
         {
             List<Action> list = new List<Action>();
             list.Add(PharaohAddMenu);
-            list.Add(PharaohRemoveMenu);
+            //list.Add(PharaohRemoveMenu);
             list.Add(GetPharaohs);
             return list;
         }
-        public static List<string> Titles() // show the options
-        {
+        //public static List<string> Titles() // show the options
+        //{
 
-        }
+        //}
         //public static void PharaohUpdateOptionsMenu()
         //{
         //    int choice = -1;
@@ -121,7 +134,7 @@ namespace L54E2T_HSZF_2024251.Console2
         {
             string pharaohId = string.Empty;
             Pharaohs oldpharaoh = null;
-            pharaohId = GetInput("Please Enter", "Pharao Id: ", InputCheckForMenus.IntChecker);
+            pharaohId = GetInput("Please Enter the pharaoh's id, you want to update", "Pharao Id: ", InputCheckForMenus.IntChecker);
             if (pharaohId != "exit")
             {
                 oldpharaoh = GetPharaohById(Convert.ToInt32(pharaohId));
@@ -129,6 +142,12 @@ namespace L54E2T_HSZF_2024251.Console2
             if (oldpharaoh != null)
             {
                 PharaohUpdateMenu(oldpharaoh);
+            }
+            else
+            {
+                System.Console.Clear();
+                System.Console.WriteLine("Pharaoh not found");
+                Task.Delay(3000).Wait();
             }
             
             
@@ -142,15 +161,9 @@ namespace L54E2T_HSZF_2024251.Console2
             bool success = false;
             while ((choiceToUpdate < 0 || choiceToUpdate > 3) && input != "exit")
             {
-                System.Console.Clear();
-                System.Console.WriteLine("Please choose which you want to update");
-                System.Console.WriteLine($"[0] Pharaoh Name");
-                System.Console.WriteLine($"[1] Pharaoh reign start date");
-                System.Console.WriteLine($"[2] Pharaoh reign end date");
-                System.Console.WriteLine($"[3] Exit");
-                System.Console.WriteLine();
+                string Headline = "Please choose which you want to update\n[0] Pharaoh Name\n[1] Pharaoh reign start date\n[2] Pharaoh reign end date\n[3] Exit";
                 System.Console.Write("Choice: ");
-                input = GetInput("Please Enter", "choice: ", InputCheckForMenus.IntChecker); // need to check for int
+                input = GetInput(Headline, "choice: ", InputCheckForMenus.IntChecker); // need to check for int
                 if (input != "exit")
                     choiceToUpdate = Convert.ToInt32(input);
             }
@@ -173,6 +186,7 @@ namespace L54E2T_HSZF_2024251.Console2
                     while (answer == string.Empty)
                     {
                         answer = GetInput("Please Enter the pharaoh new name", "Pharaoh new name: ", InputCheckForMenus.StringEmptyCheck);
+                        if (answer != "exit")
                         newpharaoh.Name = answer;
                     }
                     break;
@@ -180,6 +194,7 @@ namespace L54E2T_HSZF_2024251.Console2
                     while (answer == string.Empty)
                     {
                         answer = GetInput("Please Enter the pharaoh new reign start date (correct format: YYYY.MM.DD)", "Pharaoh new reign start date: ", InputCheckForMenus.DateTimeCheck);
+                        if (answer != "exit")
                         newpharaoh.Reign_Start = Convert.ToDateTime(answer);
                     }
                     break;
@@ -187,142 +202,160 @@ namespace L54E2T_HSZF_2024251.Console2
                     while (answer == string.Empty)
                     {
                         answer = GetInput("Please Enter the pharaoh new reign end date (correct format: YYYY.MM.DD)", "Pharaoh new reign end date: ", InputCheckForMenus.DateTimeCheck);
+                        if (answer != "exit")
+                        newpharaoh.Reign_End = Convert.ToDateTime(answer);
                         
-                        if (oldpharaoh.Reign_Start > Convert.ToDateTime(answer))
-                        {
-                            answer = string.Empty;
-                        }
-                        else
-                        {
-                            newpharaoh.Reign_End = Convert.ToDateTime(answer);
-                        }
                     }
                     break;
             }
-            try
+            if (answer != "exit")
             {
-
-                return true;
+                try
+                {
+                    pharaohService.UpdatePharaoh(newpharaoh.Id, newpharaoh);
+                    return true;
+                }
+                catch (ArgumentException e)
+                {
+                    System.Console.Clear();
+                    System.Console.WriteLine($"{e.Message} Please try again");
+                    Task.Delay(3000).Wait();
+                    return false;
+                }
             }
-            catch (ArgumentException)
+            else
             {
-
-                System.Console.WriteLine("The reign end date is erlier then the start date. Please try again");
-                Task.Delay(3000).Wait();
                 return false;
             }
+            
             
         }
         public static void PharaohRemoveMenu()
         {
-            int id = -1;
-            Console.Clear();
-            Console.WriteLine($"Please Enter the pharaoh id you wanna delete");
-            Console.WriteLine();
-            Console.Write($"Pharaoh id: ");
-            id = int.Parse(Console.ReadLine());
+            string answer = string.Empty;
+            answer = GetInput($"Please Enter the pharaoh id you wanna delete", "Pharaoh id: ", InputCheckForMenus.IntChecker);
+            if (answer != "exit" && answer != string.Empty)
+            {
+                int id = Convert.ToInt32(answer);
+                Pharaohs wanttodelete = GetPharaohById(id);
+                try
+                {
+                    pharaohService.DeletePharaoh(wanttodelete);
+                }
+                catch (ArgumentException e)
+                {
+                    System.Console.Clear();
+                    System.Console.WriteLine($"{e.Message}");
+                    Task.Delay(3000).Wait();
+                }
+                
+            }
         }
         public static Pharaohs GetPharaohById(int id)
         {
-            PharaohService p = new PharaohService();
-            Pharaohs pharaoh = p.GetPharaohsByFilter(x => x.Id == id).FirstOrDefault();
+            Pharaohs pharaoh = pharaohService.GetPharaohsByFilter(x => x.Id == id).FirstOrDefault();
             return pharaoh;
         }
         public static void GetPharaohs()
         {
-            Pharaohs[] pharaohs = new Pharaohs[0];
-            System.Console.WriteLine($"asd  Pharao Id  Pharao Name Pharao Reign Start Date Pharao Reign End Date");
-            for (int i = 0; i < pharaohs.Length; i++)
-            {
-                System.Console.WriteLine($"[{i}] | {pharaohs[i].Id} {pharaohs[i].Name} {pharaohs[i].Reign_Start} {pharaohs[i].Reign_End}");
-            }
+            ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
+            System.Console.Clear();
+            System.Console.WriteLine($"Pharao Id | Pharao Name Pharao | Reign Start Date  |Pharao Reign End Date");
+            System.Console.WriteLine(string.Join("\n", pharaohs));
+            //foreach (var item in pharaohs)
+            //{
+            //    System.Console.WriteLine($"{item}");
+            //}
+            System.Console.WriteLine("\nPress any key");
+            System.Console.ReadKey();
+            
         }
     }
-    public class ProjectMenu
-    {
-        public static void ProjectAddMenu()
-        {
-            Console.Clear();
-            string[] pharaohdata = new string[3];
-            string pleaseEnter = "Please Enter Project"; // reusable in other classes i guess
-            Console.Write($"{pleaseEnter} name: ");
-            pharaohdata[0] = Console.ReadLine(); // need check for string.empty
+    //public class ProjectMenu
+    //{
+    //    public static void ProjectAddMenu()
+    //    {
+    //        Console.Clear();
+    //        string[] pharaohdata = new string[3];
+    //        string pleaseEnter = "Please Enter Project"; // reusable in other classes i guess
+    //        Console.Write($"{pleaseEnter} name: ");
+    //        pharaohdata[0] = Console.ReadLine(); // need check for string.empty
 
-            Console.WriteLine();
-            Console.Write($"{pleaseEnter} start date (correct format: YYYY.MM.DD): ");
+    //        Console.WriteLine();
+    //        Console.Write($"{pleaseEnter} start date (correct format: YYYY.MM.DD): ");
 
-            pharaohdata[1] = Console.ReadLine(); // need check for date
-            Console.WriteLine();
-            Console.Write($"{pleaseEnter} end date (correct format: YYYY.MM.DD): ");
+    //        pharaohdata[1] = Console.ReadLine(); // need check for date
+    //        Console.WriteLine();
+    //        Console.Write($"{pleaseEnter} end date (correct format: YYYY.MM.DD): ");
 
-            pharaohdata[2] = Console.ReadLine(); // need check for date // How to make a project
-            Console.WriteLine();
-            Console.Write($"{pleaseEnter} Pharaoh id (correct format: YYYY.MM.DD): ");   // call for the project add method
-        }
-        public static void ProjectUpdateMenu() // 1. what should  and its correct or not
-        {
-            int choiceToUpdate = -1;
-            while (choiceToUpdate < 0 || choiceToUpdate > 4)
-            {
-                Console.Clear();
-                Console.WriteLine("Please choose which you want to update");
-                Console.WriteLine($"[0] Project Name");
-                Console.WriteLine($"[1] Project start date");
-                Console.WriteLine($"[2] Project end date");
-                Console.WriteLine($"[3] Project pharaoh id");
-                Console.WriteLine($"[4] Exit");
-                Console.WriteLine();
-                Console.Write("Choice: ");
-                choiceToUpdate = int.Parse(Console.ReadLine()); // need to check for int
-            }
-            if (choiceToUpdate < 4)
-                InsertProjectNewDataForUpdate(choiceToUpdate);
-        }
+    //        pharaohdata[2] = Console.ReadLine(); // need check for date // How to make a project
+    //        Console.WriteLine();
+    //        Console.Write($"{pleaseEnter} Pharaoh id (correct format: YYYY.MM.DD): ");   // call for the project add method
+    //    }
+    //    public static void ProjectUpdateMenu() // 1. what should  and its correct or not
+    //    {
+    //        int choiceToUpdate = -1;
+    //        while (choiceToUpdate < 0 || choiceToUpdate > 4)
+    //        {
+    //            Console.Clear();
+    //            Console.WriteLine("Please choose which you want to update");
+    //            Console.WriteLine($"[0] Project Name");
+    //            Console.WriteLine($"[1] Project start date");
+    //            Console.WriteLine($"[2] Project end date");
+    //            Console.WriteLine($"[3] Project pharaoh id");
+    //            Console.WriteLine($"[4] Exit");
+    //            Console.WriteLine();
+    //            Console.Write("Choice: ");
+    //            choiceToUpdate = int.Parse(Console.ReadLine()); // need to check for int
+    //        }
+    //        if (choiceToUpdate < 4)
+    //            InsertProjectNewDataForUpdate(choiceToUpdate);
+    //    }
 
-        public static string InsertProjectNewDataForUpdate(int choiceToUpdate)
-        {
-            string answer = string.Empty;
-            switch (choiceToUpdate)
-            {
-                case 0:
-                    Console.Clear();
-                    Console.WriteLine("Please Enter the project new name");
-                    Console.WriteLine();
-                    Console.Write($"Project new name: ");
-                    answer = Console.ReadLine();
-                    break;
-                case 1:
-                    Console.Clear();
-                    Console.WriteLine("Please Enter the project new start date (correct format: YYYY.MM.DD)");
-                    Console.WriteLine();
-                    Console.Write($"Project new regin start date:"); // need check for date
-                    answer = Console.ReadLine();
-                    break;
-                case 2:
-                    Console.Clear();
-                    Console.WriteLine("Please Enter the project new end date (correct format: YYYY.MM.DD)");
-                    Console.WriteLine();
-                    Console.Write($"Project new regin end date: "); // need check for date
-                    answer = Console.ReadLine();
-                    break;
-                case 3:
-                    Console.Clear();
-                    Console.WriteLine("Please Enter the project new pharaoh id (correct format: YYYY.MM.DD)");
-                    Console.WriteLine();
-                    Console.Write($"Project new regin end date: "); // need check for date
-                    answer = Console.ReadLine();
-                    break;
-            }
-            return answer;
-        }
-        public static void ProjectRemoveMenu()
-        {
-            int id = -1;
-            Console.Clear();
-            Console.WriteLine($"Please Enter the project id you wanna delete");
-            Console.WriteLine();
-            Console.Write($"Project id: ");
-            id = int.Parse(Console.ReadLine());
-        }
-    }
+    //    public static string InsertProjectNewDataForUpdate(int choiceToUpdate)
+    //    {
+    //        string answer = string.Empty;
+    //        switch (choiceToUpdate)
+    //        {
+    //            case 0:
+    //                Console.Clear();
+    //                Console.WriteLine("Please Enter the project new name");
+    //                Console.WriteLine();
+    //                Console.Write($"Project new name: ");
+    //                answer = Console.ReadLine();
+    //                break;
+    //            case 1:
+    //                Console.Clear();
+    //                Console.WriteLine("Please Enter the project new start date (correct format: YYYY.MM.DD)");
+    //                Console.WriteLine();
+    //                Console.Write($"Project new regin start date:"); // need check for date
+    //                answer = Console.ReadLine();
+    //                break;
+    //            case 2:
+    //                Console.Clear();
+    //                Console.WriteLine("Please Enter the project new end date (correct format: YYYY.MM.DD)");
+    //                Console.WriteLine();
+    //                Console.Write($"Project new regin end date: "); // need check for date
+    //                answer = Console.ReadLine();
+    //                break;
+    //            case 3:
+    //                Console.Clear();
+    //                Console.WriteLine("Please Enter the project new pharaoh id (correct format: YYYY.MM.DD)");
+    //                Console.WriteLine();
+    //                Console.Write($"Project new regin end date: "); // need check for date
+    //                answer = Console.ReadLine();
+    //                break;
+    //        }
+    //        return answer;
+    //    }
+    //    public static void ProjectRemoveMenu()
+    //    {
+    //        int id = -1;
+    //        Console.Clear();
+    //        Console.WriteLine($"Please Enter the project id you wanna delete");
+    //        Console.WriteLine();
+    //        Console.Write($"Project id: ");
+    //        id = int.Parse(Console.ReadLine());
+    //    }
+    //}
 }

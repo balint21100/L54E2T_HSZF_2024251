@@ -26,13 +26,17 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public Pharaohs AddPharaoh(Pharaohs onePharaoh)
         {
+            if (onePharaoh.Reign_Start > onePharaoh.Reign_End)
+            {
+                throw new ArgumentException("The reign end date is erlier then the start date.");
+            }
             return pharaohDataProvider.AddPharaoh(onePharaoh);
         }
         public void UpdatePharaoh(int id, Pharaohs pharaohs)
         {
             if (pharaohs.Reign_Start > pharaohs.Reign_End)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("The reign end date is erlier then the start date.");
             }
             else
             {
@@ -42,7 +46,15 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public void DeletePharaoh(Pharaohs pharaohs)
         {
-            pharaohDataProvider.DeletePharaoh(pharaohs.Id);
+            if (pharaohs == null)
+            {
+                throw new ArgumentException("Pharaoh not found");
+            }
+            else
+            {
+                pharaohDataProvider.DeletePharaoh(pharaohs.Id);
+            }
+            
         }
         public ICollection<Pharaohs> GetPharaohs()
         {

@@ -5,13 +5,13 @@ using L54E2T_HSZF_2024251.Persistence.MsSql;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace L54E2T_HSZF_2024251.Console2
+namespace L54E2T_HSZF_2024251.Console
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Starting application...");
+            System.Console.WriteLine("Starting application...");
 
             var host = Host.CreateDefaultBuilder()
                             .ConfigureServices((hostContext, services) =>
@@ -41,6 +41,13 @@ namespace L54E2T_HSZF_2024251.Console2
             IWorkerRelationShipService relationShipService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerRelationShipService>();
             ReportMenu.pharaohService = pharaohService;
             ReportMenu.workerService = workerService;
+            PharaohMenu.pharaohService = pharaohService;
+            pharaohService.AddPharaoh(new Model.Pharaohs
+            {
+                Name = "Ramses",
+                Reign_Start = Convert.ToDateTime("2002-02-12"),
+                Reign_End = Convert.ToDateTime("2002-08-12")
+            });
             Menu.MainMenu();
 
 
