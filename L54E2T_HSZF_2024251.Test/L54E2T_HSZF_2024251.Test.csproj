@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Application\L54E2T_HSZF_2024251.Application.csproj" />
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Console\L54E2T_HSZF_2024251.Console.csproj" />
     <ProjectReference Include="..\L54E2T_HSZF_2024251.Model\L54E2T_HSZF_2024251.Model.csproj" />
