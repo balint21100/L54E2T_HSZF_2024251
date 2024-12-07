@@ -10,20 +10,50 @@ namespace L54E2T_HSZF_2024251.Console
     {
         public static bool StringEmptyCheck(string input)
         {
-            if (string.IsNullOrEmpty(input)) return false;
+            if (input.ToLower() != "exit")
+            {
+                if (string.IsNullOrEmpty(input)) return false;
+            }
             return true;
         }
         public static bool DateTimeCheck(string input)
         {
-            try
+            if (input.ToLower() != "exit")
             {
-                Convert.ToDateTime(input);
+                try
+                {
+                    Convert.ToDateTime(input);
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+            }
+            else
+            {
                 return true;
             }
-            catch (Exception)
+            
+        }
+        public static bool IntChecker(string input)
+        {
+            if (input.ToLower() != "exit")
             {
-
-                return false;
+                try
+                {
+                    Convert.ToInt32(input);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
             }
         }
     }

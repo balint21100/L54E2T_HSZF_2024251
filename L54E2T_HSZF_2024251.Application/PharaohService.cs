@@ -30,7 +30,15 @@ namespace L54E2T_HSZF_2024251.Application
         }
         public void UpdatePharaoh(int id, Pharaohs pharaohs)
         {
-            pharaohDataProvider.UpdatePharaoh(id, pharaohs);
+            if (pharaohs.Reign_Start > pharaohs.Reign_End)
+            {
+                throw new ArgumentException();
+            }
+            else
+            {
+                pharaohDataProvider.UpdatePharaoh(id, pharaohs);
+            }
+            
         }
         public void DeletePharaoh(Pharaohs pharaohs)
         {
