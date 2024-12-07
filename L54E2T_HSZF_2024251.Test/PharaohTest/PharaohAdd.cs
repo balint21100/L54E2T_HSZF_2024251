@@ -31,6 +31,7 @@ namespace L54E2T_HSZF_2024251.Test.PharaohTest
         {
             Pharaohs p = TestData.wrongp;
             Assert.Throws<ArgumentException>(() => pharaohService.AddPharaoh(p));
+            "Hello world";
         }
     }
 }
