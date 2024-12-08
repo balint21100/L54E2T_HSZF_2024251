@@ -13,6 +13,7 @@ namespace L54E2T_HSZF_2024251.Application
         public Workers AddWorker(Workers oneworker);
         public void UpdateWorker(int id, Workers workers);
         public void DeleteWorker(Workers worker);
+        public event Action<Workers> TooOldW;
         public ICollection<Workers> GetWorkersByFilter(Func<Workers, bool> filter);
         public ICollection<Workers> GetWorker();
     }
@@ -20,6 +21,7 @@ namespace L54E2T_HSZF_2024251.Application
     {
         private readonly IWorkerDataProvider workerDataProvider;
         private readonly IProjectDataProvider projectDataProvider;
+        public event Action<Workers> TooOldW;
 
         public WorkerService(IWorkerDataProvider workerDataProvider, IProjectDataProvider projectDataProvider)
         {
@@ -35,7 +37,7 @@ namespace L54E2T_HSZF_2024251.Application
             }
             if (oneworker.Age > 59)
             {
-                throw new ArgumentException("The worker too old. ");
+                TooOldW?.Invoke(oneworker);
             }
             return workerDataProvider.AddWorker(oneworker);
         }
@@ -47,7 +49,7 @@ namespace L54E2T_HSZF_2024251.Application
             }
             if (workers.Age > 59)
             {
-                throw new ArgumentException("The worker too old.");
+                TooOldW?.Invoke(workers);
             }
             workerDataProvider.UpdateWorker(id, workers);
         }

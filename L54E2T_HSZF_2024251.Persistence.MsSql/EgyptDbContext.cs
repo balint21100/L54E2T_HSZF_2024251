@@ -1,8 +1,5 @@
 ﻿using L54E2T_HSZF_2024251.Model;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Xml.Serialization;
 
 namespace L54E2T_HSZF_2024251.Persistence.MsSql
 {

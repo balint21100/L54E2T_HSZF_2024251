@@ -31,12 +31,6 @@ namespace L54E2T_HSZF_2024251.Test.WorkerTest
             workerDataProvider.Verify(x => x.AddWorker(It.IsAny<Workers>()), Times.Once);
         }
         [Test]
-        public void AddWorkerTestTooOld()
-        {
-            Workers w = TestData.WorkerWithBadAge;
-            Assert.Throws<ArgumentException>(() => workerService.AddWorker(w));
-        }
-        [Test]
         public void AddWorkerTestBadId()
         {
             Workers w = TestData.WorkerWithBadId;

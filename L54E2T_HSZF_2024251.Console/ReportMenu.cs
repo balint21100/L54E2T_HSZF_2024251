@@ -16,6 +16,11 @@ namespace L54E2T_HSZF_2024251.Console
         public static IWorkerService workerService;
         public static void WorkersByPharaohs()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Workers count by pharaohs");
+            System.Console.WriteLine();
+            
+
             ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
             Dictionary<Pharaohs,int> pharaohs_workers = new Dictionary<Pharaohs, int>();
             foreach (Pharaohs pharaoh in pharaohs)
@@ -27,14 +32,24 @@ namespace L54E2T_HSZF_2024251.Console
                 }
                 pharaohs_workers.Add(pharaoh, sum);
             }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Nr. | Pharaoh name | Workers count");
+            System.Console.WriteLine("");
             int i = 0;
             foreach (KeyValuePair<Pharaohs, int> item in pharaohs_workers)
             {
-                System.Console.WriteLine($"[{i}] | {item.Key} {item.Value}");
+                System.Console.WriteLine($"[{i}] | {item.Key.Name} | {item.Value}");
+                i++;
             }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
         }
         public static void WorkersByAge()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Workers by age");
+            System.Console.WriteLine();
             int[] counts = new int[6];
             ICollection<Workers> workers = workerService.GetWorker();
             for (int i = 0; i < 6; i++)
@@ -45,26 +60,78 @@ namespace L54E2T_HSZF_2024251.Console
             {
                 System.Console.WriteLine($"{i * 10}-{i * 10 + 10 - 1} : {counts[i]}");
             }
-            
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
 
         }
         public static void PharaohsByTime()
         {
-            //Dictionary<int,List<Pharaohs>> pharaohs = new Dictionary<int, List<Pharaohs>>();
-            //ICollection<Pharaohs>  pharaohsColl = pharaohService.GetPharaohs();
-            //foreach (var item in pharaohsColl)
-            //{
-            //    pharaohs.Contains()
-            //}
+            System.Console.Clear();
+            System.Console.WriteLine($"Pharaohs Between times");
+            DateTime StartDate;
+            DateTime EndDate;
+            string input;
+            string iput;
+            do
+            {
+                System.Console.WriteLine("Please enter the start date (Correct format YYYY.MM.DD)");
+                System.Console.WriteLine() ;
+                
+                System.Console.Write("Start date: ");
+               input = System.Console.ReadLine();
+            } while (!InputCheckForMenus.DateTimeCheck(input) && input != "exit");
+
+            StartDate = Convert.ToDateTime(input);
+            do
+            {
+                if (input!= "exit")
+                {
+                    System.Console.WriteLine();
+                    System.Console.WriteLine("Please enter the end date (Correct format YYYY.MM.DD)");
+                    System.Console.WriteLine();
+
+                    System.Console.Write("Start end: ");
+                    iput = System.Console.ReadLine();
+                }
+                else
+                {
+                    iput = input;
+                }
+                
+            } while (!InputCheckForMenus.DateTimeCheck(iput) && iput != "exit");
+            if (input != "exit" && iput != "exit")
+            {
+                EndDate = Convert.ToDateTime(iput);
+
+                ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
+                List<string> pharaoh = pharaohs.Where(x => x.Reign_Start > StartDate && x.Reign_End < EndDate).Select(x => x.Name).ToList();
+                System.Console.Clear();
+                System.Console.WriteLine($"{StartDate.ToShortDateString()} - {EndDate.ToShortDateString()}");
+                System.Console.WriteLine();
+                foreach (string item in pharaoh)
+                {
+                    System.Console.WriteLine($"{item}");
+                }
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
         }
         
         public static void WorkerTypesInProjects()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Workers count by types in projects");
+            System.Console.WriteLine();
+            System.Console.WriteLine($"Worker type - Worker Count");
+            System.Console.WriteLine();
             ICollection<Projects> projects = projectService.GetProjects();
             foreach (Projects project in projects)
             {
                 System.Console.WriteLine($"{project.Name}:");
-                System.Console.WriteLine($"Worker type - Worker Count");
+                System.Console.WriteLine($"");
                 Dictionary<string, int> Workertypes = new Dictionary<string, int>();
                 foreach (Workers worker in project.Workers)
                 {
@@ -79,28 +146,42 @@ namespace L54E2T_HSZF_2024251.Console
                 }
                 foreach (KeyValuePair<string,int> types in Workertypes)
                 {
-                    System.Console.WriteLine($"{types} - {types.Value}");
+                    System.Console.WriteLine($" \t{types.Key} - {types.Value}");
 
                 }
                 System.Console.WriteLine();
             }
+            
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
         }
         public static void PharaohsProjects()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Pharaohs all projects count");
+            System.Console.WriteLine();
             ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
 
             foreach (Pharaohs item in pharaohs)
             {
                 System.Console.WriteLine($"{item.Name} started {item.Projects.Count} project(s)");
-                System.Console.WriteLine($"Project(s):");
+                System.Console.WriteLine($"\tProject(s):");
                 foreach (Projects project in item.Projects)
                 {
-                    System.Console.WriteLine($"{project.Name}");
+                    System.Console.WriteLine($"\t\t{project.Name}");
                 }
+                System.Console.WriteLine();
             }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
         }
         public static void WorkerManagerRelationInProjects()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Manager worker relationships");
+            System.Console.WriteLine();
             ICollection<Projects> projects = projectService.GetProjects();
             foreach (Projects project in projects)
             {
@@ -109,48 +190,60 @@ namespace L54E2T_HSZF_2024251.Console
                 {
                     if (worker.subWorkers.Count != 0)
                     {
-                        System.Console.WriteLine($"Manager: {worker.Name}");
-                        System.Console.WriteLine($"Workers:");
+                        System.Console.WriteLine($"\tManager: {worker.Name}");
+                        System.Console.WriteLine($"\t\tWorkers:");
                         foreach (Workers subworker in worker.subWorkers)
                         {
-                            System.Console.WriteLine($"{subworker.Name}");
+                            System.Console.WriteLine($"\t\t\t{subworker.Name}");
                         }
+                        System.Console.WriteLine($"");
                     }
                     
                 }
             }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
         }
         public static void PharaohProjects()
         {
+            System.Console.Clear();
+            System.Console.WriteLine("Projects data in xml");
+            System.Console.WriteLine();
             CreateDirectory.CreateDirectorys();
             ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
             foreach (Pharaohs pharaoh in pharaohs)
             {
+
                 string root = $@"Projects\Pharaoh_{pharaoh.Id}";
+                
                 foreach (Projects projectz in pharaoh.Projects)
                 {
-                    XmlWriter writer = XmlWriter.Create($@"{root}\{pharaoh.Name}.xml");
-
+                    XmlWriter writer = XmlWriter.Create($@"{root}\{projectz.Name}.xml");
                     writer.WriteStartDocument();
 
-                    writer.WriteComment("This file is generated by the program.");
 
-                    writer.WriteStartElement($"Projects");
+                    
                     writer.WriteStartElement($"Project");
-                    writer.WriteAttributeString($"Name", $"{projectz.Name}");
+                    writer.WriteElementString($"Name", $"{projectz.Name}");
                     writer.WriteElementString($"StartDate", $"{projectz.Start_date.ToShortDateString()}");
                     writer.WriteElementString($"EndDate", $"{projectz.End_date.ToShortDateString()}");
                     writer.WriteElementString($"WorkersCount", $"{projectz.WorkerCount}");
                     writer.WriteElementString($"ProjectValue", $"{projectz.ProjectValue}");
                     writer.WriteEndElement();
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
                     writer.Flush();
                     writer.Close();
                 }
                 
+
             }
-            
+            System.Console.WriteLine();
+            System.Console.WriteLine($"The reports successfully generated in the Projects folder");
+            System.Console.WriteLine();
+
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
+
         }
     }
 }

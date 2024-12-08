@@ -13,6 +13,7 @@ namespace L54E2T_HSZF_2024251.Application
         public Projects AddProjects(Projects oneProject);
         public void UpdateProjects(int id, Projects project);
         public void DeleteProjects(Projects projects);
+        public event Action<Projects> DieFast;
         public ICollection<Projects> GetProjectsByFilter(Func<Projects, bool> filter);
         public ICollection<Projects> GetProjects();
     }
@@ -20,7 +21,7 @@ namespace L54E2T_HSZF_2024251.Application
     {
         private readonly IProjectDataProvider projectDataProvider;
         private readonly IPharaohDataProvider pharaohDataProvider;
-        public event Action WorngAge;
+        public event Action<Projects> DieFast;
 
         public ProjectService(IProjectDataProvider projectDataProvider, IPharaohDataProvider pharaohDataProvider)
         {
@@ -37,6 +38,11 @@ namespace L54E2T_HSZF_2024251.Application
             if (!pharaohDataProvider.GetPharaohs().Any(x => x.Id == oneProject.PharaoId))
             {
                 throw new ArgumentException("Error! Pharaoh not found.");
+            }
+            Pharaohs pharaoh = pharaohDataProvider.GetPharaohs().First(x => x.Id == oneProject.PharaoId);
+            if (pharaoh.Reign_End < oneProject.End_date)
+            {
+                DieFast?.Invoke(oneProject);
             }
             return projectDataProvider.AddProjects(oneProject);
         }

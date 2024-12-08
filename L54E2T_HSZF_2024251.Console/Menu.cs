@@ -53,6 +53,9 @@ namespace L54E2T_HSZF_2024251.Console
                     case 2:
                         SubMenuWorkers("Worker");
                         break;
+                    case 3:
+                        ReportMenu();
+                        break;
                 }
             }
 

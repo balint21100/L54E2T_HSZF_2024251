@@ -50,14 +50,28 @@ namespace L54E2T_HSZF_2024251.Console
             WorkerMenu.workerRelationShipService = relationShipService;
             CreateDirectory.pharaohService = pharaohService;
             fileService.Import("SeedGoodConditions.json");
+            Preparations(workerService, projectService);
             CreateDirectory.CreateDirectorys();
-            ReportMenu.PharaohProjects();
             Menu.MainMenu();
 
 
         }
 
-        
+        private static void Preparations(IWorkerService workerService, IProjectService projectService)
+        {
+            workerService.TooOldW += x =>
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"The {x.Name} worker is too Old ({x.Age})");
+                Task.Delay(3000).Wait();
+            };
+            projectService.DieFast += x =>
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"The pharaoh reign ends before the project is finished");
+                Task.Delay(3000).Wait();
+            };
+        }
 
     }
     

@@ -40,11 +40,5 @@ namespace L54E2T_HSZF_2024251.Test.WorkerTest
             Workers w = TestData.WorkerWithBadId;
             Assert.Throws<ArgumentException>(() => workerService.UpdateWorker(w.Id, w));
         }
-        [Test]
-        public void TestUpdateWorkerBadAge()
-        {
-            Workers w = TestData.WorkerWithBadAge;
-            Assert.Throws<ArgumentException>(() => workerService.UpdateWorker(w.Id, w));
-        }
     }
 }
