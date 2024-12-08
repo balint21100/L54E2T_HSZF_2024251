@@ -156,6 +156,41 @@ namespace L54E2T_HSZF_2024251.Console
             System.Console.WriteLine("Press any key");
             System.Console.ReadKey();
         }
+        public static void SearchByType()
+        {
+            System.Console.Clear();
+            System.Console.WriteLine("Please enter a worker type");
+            string input = string.Empty;
+            while (input == string.Empty && input != "exit")
+            {
+                System.Console.Write("Worker type:");
+                input = System.Console.ReadLine();
+            }
+            IEnumerable<Projects> projects = projectService.GetProjects().Where(x =>
+            {
+                foreach (Workers worker in x.Workers)
+                {
+                    if (worker.Type == input)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            });
+            System.Console.Clear();
+            System.Console.WriteLine($"Project with worker with this type: {input}");
+            System.Console.WriteLine();
+            System.Console.WriteLine($"Project name | start date | workers with this type");
+            System.Console.WriteLine();
+            foreach (Projects project in projects)
+            {
+                System.Console.WriteLine($"{project.Name} | {project.Start_date.ToShortDateString()} | {project.Workers.Count(x => x.Type == input)}");
+            }
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key");
+            System.Console.ReadKey();
+        }
+
         public static void PharaohsProjects()
         {
             System.Console.Clear();

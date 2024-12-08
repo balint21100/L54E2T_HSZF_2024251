@@ -59,6 +59,12 @@ namespace L54E2T_HSZF_2024251.Console
 
         private static void Preparations(IWorkerService workerService, IProjectService projectService)
         {
+            workerService.SuccessfullDelete += x =>
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"Successfully deleted {x.Id} | {x.Name} | {x.Type})");
+                Task.Delay(3000).Wait();
+            };
             workerService.TooOldW += x =>
             {
                 System.Console.Clear();

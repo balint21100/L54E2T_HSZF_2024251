@@ -183,7 +183,7 @@ namespace L54E2T_HSZF_2024251.Console
         {
             int choice = -1;
             string answer = string.Empty;
-            while (choice < 0 || choice > 7)
+            while (choice < 0 || choice > 8)
             {
                 System.Console.Clear();
                 System.Console.WriteLine($"Report Menu");
@@ -195,7 +195,8 @@ namespace L54E2T_HSZF_2024251.Console
                 System.Console.WriteLine($"[4] | Workers count by types in projects");
                 System.Console.WriteLine($"[5] | Pharaohs all projects count");
                 System.Console.WriteLine($"[6] | Manager worker relationships");
-                System.Console.WriteLine($"[7] | Exit");
+                System.Console.WriteLine($"[7] | Manager worker relationships");
+                System.Console.WriteLine($"[8] | Exit");
                 System.Console.WriteLine();
                 System.Console.Write("choice: ");
                 answer = System.Console.ReadLine();
@@ -203,7 +204,7 @@ namespace L54E2T_HSZF_2024251.Console
                 {
                     if (answer == "exit")
                     {
-                        choice = 7;
+                        choice = 8;
                     }
                     else
                     {
@@ -234,6 +235,9 @@ namespace L54E2T_HSZF_2024251.Console
                     break;
                 case 6:
                     Console.ReportMenu.WorkerManagerRelationInProjects();
+                    break;
+                case 7:
+                    Console.ReportMenu.SearchByType();
                     break;
             }
         }

@@ -21,7 +21,7 @@ namespace L54E2T_HSZF_2024251.Model
         public string Type { get; set; }
         [Required]
         public int ProjectId { get; set; }
-        public ICollection<Workers> subWorkers { get; set; }
+        public virtual ICollection<Workers> subWorkers { get; set; }
         public Workers()
         {
             subWorkers = new HashSet<Workers>();

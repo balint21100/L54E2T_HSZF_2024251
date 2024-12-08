@@ -14,6 +14,7 @@ namespace L54E2T_HSZF_2024251.Application
         public void UpdateWorker(int id, Workers workers);
         public void DeleteWorker(Workers worker);
         public event Action<Workers> TooOldW;
+        public event Action<Workers> SuccessfullDelete;
         public ICollection<Workers> GetWorkersByFilter(Func<Workers, bool> filter);
         public ICollection<Workers> GetWorker();
     }
@@ -22,6 +23,7 @@ namespace L54E2T_HSZF_2024251.Application
         private readonly IWorkerDataProvider workerDataProvider;
         private readonly IProjectDataProvider projectDataProvider;
         public event Action<Workers> TooOldW;
+        public event Action<Workers> SuccessfullDelete;
 
         public WorkerService(IWorkerDataProvider workerDataProvider, IProjectDataProvider projectDataProvider)
         {
@@ -39,6 +41,7 @@ namespace L54E2T_HSZF_2024251.Application
             {
                 TooOldW?.Invoke(oneworker);
             }
+
             return workerDataProvider.AddWorker(oneworker);
         }
         public void UpdateWorker(int id, Workers workers)
@@ -60,6 +63,7 @@ namespace L54E2T_HSZF_2024251.Application
                 throw new ArgumentException("Worker not found");
             }
             workerDataProvider.DeleteWorker(worker.Id);
+            SuccessfullDelete?.Invoke(worker);
         }
         public ICollection<Workers> GetWorker()
         {

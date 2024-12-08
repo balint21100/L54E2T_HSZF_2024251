@@ -40,6 +40,7 @@ namespace L54E2T_HSZF_2024251.Persistence.MsSql
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EgyptDb;Trusted_Connection=True;");
+            optionsBuilder.UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
         
