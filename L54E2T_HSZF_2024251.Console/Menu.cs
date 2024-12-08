@@ -176,6 +176,64 @@ namespace L54E2T_HSZF_2024251.Console
 
 
         }
+        public static void ReportMenu()
+        {
+            int choice = -1;
+            string answer = string.Empty;
+            while (choice < 0 || choice > 7)
+            {
+                System.Console.Clear();
+                System.Console.WriteLine($"Report Menu");
+                System.Console.WriteLine("");
+                System.Console.WriteLine($"[0] | Projects data in xml");
+                System.Console.WriteLine($"[1] | Workers by age");
+                System.Console.WriteLine($"[2] | Pharaohs between time periodes");
+                System.Console.WriteLine($"[3] | Workers count by pharaohs");
+                System.Console.WriteLine($"[4] | Workers count by types in projects");
+                System.Console.WriteLine($"[5] | Pharaohs all projects count");
+                System.Console.WriteLine($"[6] | Manager worker relationships");
+                System.Console.WriteLine($"[7] | Exit");
+                System.Console.WriteLine();
+                System.Console.Write("choice: ");
+                answer = System.Console.ReadLine();
+                if (InputCheckForMenus.IntChecker(answer))
+                {
+                    if (answer == "exit")
+                    {
+                        choice = 7;
+                    }
+                    else
+                    {
+                        choice = Convert.ToInt32(answer);
+                    }
+                }
+            }
+
+            switch (choice)
+            {
+                case 0:
+                    Console.ReportMenu.PharaohProjects();
+                    break;
+                case 1:
+                    Console.ReportMenu.WorkersByAge();
+                    break;
+                case 2:
+                    Console.ReportMenu.PharaohsByTime();
+                    break;
+                case 3:
+                    Console.ReportMenu.WorkersByPharaohs();
+                    break;
+                case 4:
+                    Console.ReportMenu.WorkerTypesInProjects();
+                    break;
+                case 5:
+                    Console.ReportMenu.PharaohsProjects();
+                    break;
+                case 6:
+                    Console.ReportMenu.WorkerManagerRelationInProjects();
+                    break;
+            }
+        }
 
 
     }

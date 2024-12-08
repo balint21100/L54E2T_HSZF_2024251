@@ -50,7 +50,8 @@ namespace L54E2T_HSZF_2024251.Console
             WorkerMenu.workerRelationShipService = relationShipService;
             CreateDirectory.pharaohService = pharaohService;
             fileService.Import("SeedGoodConditions.json");
-            
+            CreateDirectory.CreateDirectorys();
+            ReportMenu.PharaohProjects();
             Menu.MainMenu();
 
 

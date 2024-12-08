@@ -2,12 +2,12 @@
   "Pharaohs": [
     {
       "Name": "Ramses II",
-      "Reign_Start": "1279-01-01T00:00:00",
-      "Reign_End": "1213-01-01T00:00:00",
+      "Reign_Start": "1200-01-01T00:00:00",
+      "Reign_End": "1280-01-01T00:00:00",
       "Projects": [
         {
           "Name": "Abu Simbel Temples",
-          "Start_date": "1264-01-01T00:00:00",
+          "Start_date": "1240-01-01T00:00:00",
           "End_date": "1244-01-01T00:00:00",
           "Workers": [
             {
@@ -50,13 +50,13 @@
     },
     {
       "Name": "Tutankhamun",
-      "Reign_Start": "1332-01-01T00:00:00",
-      "Reign_End": "1323-01-01T00:00:00",
+      "Reign_Start": "1322-01-01T00:00:00",
+      "Reign_End": "1340-01-01T00:00:00",
       "Projects": [
         {
           "Name": "Valley of the Kings",
-          "Start_date": "1330-01-01T00:00:00",
-          "End_date": "1323-01-01T00:00:00",
+          "Start_date": "1313-01-01T00:00:00",
+          "End_date": "1330-01-01T00:00:00",
           "Workers": [
             {
               "Name": "Khay",
@@ -74,8 +74,8 @@
         },
         {
           "Name": "Luxor Temple Restoration",
-          "Start_date": "1325-01-01T00:00:00",
-          "End_date": "1323-01-01T00:00:00",
+          "Start_date": "1323-01-01T00:00:00",
+          "End_date": "1325-01-01T00:00:00",
           "Workers": [
             {
               "Name": "Seneb",

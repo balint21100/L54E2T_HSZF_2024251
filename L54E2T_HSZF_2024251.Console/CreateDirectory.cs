@@ -22,7 +22,7 @@ namespace L54E2T_HSZF_2024251.Console
             ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
             foreach (Pharaohs pharaoh in pharaohs)
             {
-                string subdir = $@"Project\Pharaoh_{pharaoh.Id}";
+                string subdir = $@"Projects\Pharaoh_{pharaoh.Id}";
                 if (!Directory.Exists(subdir))
                 {
                     Directory.CreateDirectory(subdir);
