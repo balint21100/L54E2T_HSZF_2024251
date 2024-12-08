@@ -119,5 +119,14 @@ namespace L54E2T_HSZF_2024251.Console
                 }
             }
         }
+        public static void PharaohProjects()
+        {
+            ICollection<Pharaohs> pharaohs = pharaohService.GetPharaohs();
+            foreach (Pharaohs pharaoh in pharaohs)
+            {
+                string root = $@"Project\Pharaoh_{pharaoh.Id}";
+            }
+            
+        }
     }
 }

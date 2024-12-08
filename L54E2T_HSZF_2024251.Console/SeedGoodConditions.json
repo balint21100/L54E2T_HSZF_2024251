@@ -1,0 +1,98 @@
+{
+  "Pharaohs": [
+    {
+      "Name": "Ramses II",
+      "Reign_Start": "1279-01-01T00:00:00",
+      "Reign_End": "1213-01-01T00:00:00",
+      "Projects": [
+        {
+          "Name": "Abu Simbel Temples",
+          "Start_date": "1264-01-01T00:00:00",
+          "End_date": "1244-01-01T00:00:00",
+          "Workers": [
+            {
+              "Name": "Sennedjem",
+              "Age": 35,
+              "Type": "Architect",
+              "SubWorkers": [
+                {
+                  "Name": "Hori",
+                  "Age": 50,
+                  "Type": "Foreman",
+                  "SubWorkers": [
+                    {
+                      "Name": "Sam",
+                      "Age": 50,
+                      "Type": "Foreman",
+                      "SubWorkers": []
+
+                    }
+                  ]
+                },
+                {
+                  "Name": "Imhotep",
+                  "Age": 45,
+                  "Type": "Builder",
+                  "SubWorkers": []
+                }
+              ]
+            },
+            {
+              "Name": "Ptahhotep",
+              "Age": 40,
+              "Type": "Engineer",
+              "SubWorkers": []
+            }
+          ]
+        }
+        
+      ]
+    },
+    {
+      "Name": "Tutankhamun",
+      "Reign_Start": "1332-01-01T00:00:00",
+      "Reign_End": "1323-01-01T00:00:00",
+      "Projects": [
+        {
+          "Name": "Valley of the Kings",
+          "Start_date": "1330-01-01T00:00:00",
+          "End_date": "1323-01-01T00:00:00",
+          "Workers": [
+            {
+              "Name": "Khay",
+              "Age": 30,
+              "Type": "Painter",
+              "SubWorkers": []
+            },
+            {
+              "Name": "Neferhotep",
+              "Age": 33,
+              "Type": "Stone Mason",
+              "SubWorkers": []
+            }
+          ]
+        },
+        {
+          "Name": "Luxor Temple Restoration",
+          "Start_date": "1325-01-01T00:00:00",
+          "End_date": "1323-01-01T00:00:00",
+          "Workers": [
+            {
+              "Name": "Seneb",
+              "Age": 28,
+              "Type": "Carpenter",
+              "SubWorkers": []
+            },
+            {
+              "Name": "Mereruka",
+              "Age": 37,
+              "Type": "Artist",
+              "SubWorkers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  
+}

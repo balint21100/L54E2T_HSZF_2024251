@@ -12,19 +12,26 @@
     <None Remove="Seed 23.xml" />
     <None Remove="Seed.json" />
     <None Remove="Seed.xml" />
+    <None Remove="SeedGoodConditions.json" />
+    <None Remove="SeedWithNoPharaohs_cleanfile.json" />
+    <None Remove="SeedWithNoProjects.json" />
+    <None Remove="SeedWithNoWorkers.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Seed 23.json">
+    <Content Include="SeedWithNoProjects.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed 23.xml">
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SeedGoodConditions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed.json">
+    <Content Include="SeedWithNoPharaohs_cleanfile.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Seed.xml">
+    <Content Include="SeedWithNoWorkers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

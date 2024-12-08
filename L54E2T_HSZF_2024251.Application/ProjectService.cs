@@ -20,6 +20,7 @@ namespace L54E2T_HSZF_2024251.Application
     {
         private readonly IProjectDataProvider projectDataProvider;
         private readonly IPharaohDataProvider pharaohDataProvider;
+        public event Action WorngAge;
 
         public ProjectService(IProjectDataProvider projectDataProvider, IPharaohDataProvider pharaohDataProvider)
         {
