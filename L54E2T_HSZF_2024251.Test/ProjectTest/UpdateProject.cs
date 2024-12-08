@@ -13,34 +13,34 @@ namespace L54E2T_HSZF_2024251.Test.ProjectTest
     [TestFixture]
     internal class UpdateProject
     {
-        private Mock<IProjectDataProvider> projectprov;
+        private Mock<IProjectDataProvider> projectDataProvider;
         private IProjectService projectService;
         private Mock<IPharaohDataProvider> pharaohprov;
         [SetUp]
         public void Init()
         {
-            projectprov = new Mock<IProjectDataProvider>(MockBehavior.Strict);
+            projectDataProvider = new Mock<IProjectDataProvider>(MockBehavior.Strict);
             pharaohprov = new Mock<IPharaohDataProvider>(MockBehavior.Strict);
-            projectService = new ProjectService(projectprov.Object, pharaohprov.Object);
+            projectService = new ProjectService(projectDataProvider.Object, pharaohprov.Object);
 
-            projectprov.Setup(x => x.UpdateProjects(It.IsAny<int>(), It.IsAny<Projects>())).Verifiable();
+            projectDataProvider.Setup(x => x.UpdateProjects(It.IsAny<int>(), It.IsAny<Projects>())).Verifiable();
             pharaohprov.Setup(x => x.GetPharaohs()).Returns(TestData.PharaohList).Verifiable();
         }
         [Test]
-        public void TestUpdatePharaohGodd()
+        public void TestUpdateProjectGodd()
         {
             Projects p = TestData.ProjectWithGoodDate;
             projectService.UpdateProjects(p.Id, p);
-            projectprov.Verify(x => x.UpdateProjects(It.IsAny<int>(), It.IsAny<Projects>()), Times.Once);
+            projectDataProvider.Verify(x => x.UpdateProjects(It.IsAny<int>(), It.IsAny<Projects>()), Times.Once);
         }
         [Test]
-        public void TestUpdatePharaohBadId()
+        public void TestUpdateProjectBadId()
         {
             Projects p = TestData.ProjectWithBadId;
             Assert.Throws<ArgumentException>(() => projectService.UpdateProjects(p.Id, p));
         }
         [Test]
-        public void TestUpdatePharaohBadDate()
+        public void TestUpdateProjectBadDate()
         {
             Projects p = TestData.ProjectWithBadDate;
             Assert.Throws<ArgumentException>(() => projectService.UpdateProjects(p.Id, p));

@@ -13,24 +13,24 @@ namespace L54E2T_HSZF_2024251.Test.ProjectTest
     [TestFixture]
     internal class DeleteProject
     {
-        private Mock<IProjectDataProvider> projectprov;
+        private Mock<IProjectDataProvider> projectDataProvider;
         private IProjectService projectService;
         private Mock<IPharaohDataProvider> pharaohprov;
         [SetUp]
         public void Init()
         {
-            projectprov = new Mock<IProjectDataProvider>(MockBehavior.Strict);
+            projectDataProvider = new Mock<IProjectDataProvider>(MockBehavior.Strict);
             pharaohprov = new Mock<IPharaohDataProvider>(MockBehavior.Strict);
-            projectService = new ProjectService(projectprov.Object, pharaohprov.Object);
+            projectService = new ProjectService(projectDataProvider.Object, pharaohprov.Object);
 
-            projectprov.Setup(x => x.DeleteProjects(It.IsAny<int>())).Verifiable();
+            projectDataProvider.Setup(x => x.DeleteProjects(It.IsAny<int>())).Verifiable();
         }
         [Test]
         public void DeleteGoodProject()
         {
             Projects p = TestData.ProjectWithGoodDate;
             projectService.DeleteProjects(p);
-            projectprov.Verify(x => x.DeleteProjects(p.Id), Times.Once());
+            projectDataProvider.Verify(x => x.DeleteProjects(p.Id), Times.Once());
         }
         [Test]
         public void DeleteBadProject()

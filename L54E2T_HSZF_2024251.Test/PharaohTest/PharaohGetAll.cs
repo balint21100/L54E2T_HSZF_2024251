@@ -24,7 +24,7 @@ namespace L54E2T_HSZF_2024251.Test.PharaohTest
             pharaohprov.Setup(x => x.GetPharaohs()).Returns(TestData.PharaohList).Verifiable();
         }
         [Test]
-        public void GetAllP()
+        public void GetAllPharaoh()
         {
             var PharaohsList = pharaohService.GetPharaohs();
             pharaohprov.Verify(x => x.GetPharaohs(), Times.Once());

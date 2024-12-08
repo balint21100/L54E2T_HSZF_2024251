@@ -42,6 +42,7 @@ namespace L54E2T_HSZF_2024251.Console
             IWorkerRelationShipService relationShipService = host.Services.CreateScope().ServiceProvider.GetService<IWorkerRelationShipService>();
             ReportMenu.pharaohService = pharaohService;
             ReportMenu.workerService = workerService;
+            ReportMenu.projectService = projectService;
             PharaohMenu.pharaohService = pharaohService;
             ProjectMenu.projectService = projectService;
             WorkerMenu.workerService = workerService;

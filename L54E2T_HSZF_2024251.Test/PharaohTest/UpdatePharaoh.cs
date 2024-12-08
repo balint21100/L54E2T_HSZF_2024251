@@ -24,14 +24,14 @@ namespace L54E2T_HSZF_2024251.Test.PharaohTest
             pharaohprov.Setup(x => x.UpdatePharaoh(It.IsAny<int>(), It.IsAny<Pharaohs>())).Verifiable();
         }
         [Test]
-        public void TestUpdatePharaohG()
+        public void TestUpdatePharaohGood()
         {
             Pharaohs p = TestData.p;
             pharaohService.UpdatePharaoh(p.Id, p);
             pharaohprov.Verify(x => x.UpdatePharaoh(It.IsAny<int>(), It.IsAny<Pharaohs>()), Times.Once);
         }
         [Test]
-        public void TestUpdatePharaohB()
+        public void TestUpdatePharaohBad()
         {
             Pharaohs p = TestData.wrongp;
             Assert.Throws<ArgumentException>(() => pharaohService.UpdatePharaoh(p.Id, p));

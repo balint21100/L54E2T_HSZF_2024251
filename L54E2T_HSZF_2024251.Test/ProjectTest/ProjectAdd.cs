@@ -10,34 +10,34 @@ namespace L54E2T_HSZF_2024251.Test.ProjectTest
     [TestFixture]
     internal class ProjectAdd
     {
-        private Mock<IProjectDataProvider> projectprov;
+        private Mock<IProjectDataProvider> projectDataProvider;
         private IProjectService projectService;
         private Mock<IPharaohDataProvider> pharaohprov;
         [SetUp]
         public void Init()
         {
-            projectprov = new Mock<IProjectDataProvider>(MockBehavior.Strict);
+            projectDataProvider = new Mock<IProjectDataProvider>(MockBehavior.Strict);
             pharaohprov = new Mock<IPharaohDataProvider>(MockBehavior.Strict);
-            projectService = new ProjectService(projectprov.Object, pharaohprov.Object);
+            projectService = new ProjectService(projectDataProvider.Object, pharaohprov.Object);
 
-            projectprov.Setup(x => x.AddProjects(It.IsAny<Projects>())).Returns((Projects x) => x).Verifiable();
+            projectDataProvider.Setup(x => x.AddProjects(It.IsAny<Projects>())).Returns((Projects x) => x).Verifiable();
             pharaohprov.Setup(x => x.GetPharaohs()).Returns(TestData.PharaohList).Verifiable();
         }
         [Test]
-        public void AddTestGood()
+        public void AddProjectTestGood()
         {
             Projects p = TestData.ProjectWithGoodDate;
             projectService.AddProjects(p);
-            projectprov.Verify(x => x.AddProjects(It.IsAny<Projects>()), Times.Once);
+            projectDataProvider.Verify(x => x.AddProjects(It.IsAny<Projects>()), Times.Once);
         }
         [Test]
-        public void AddTestBadDate()
+        public void AddProjectTestBadDate()
         {
             Projects p = TestData.ProjectWithBadDate;
             Assert.Throws<ArgumentException>(() => projectService.AddProjects(p));
         }
         [Test]
-        public void AddTestBadId()
+        public void AddProjectTestBadId()
         {
             Projects p = TestData.ProjectWithBadId;
             Assert.Throws<ArgumentException>(() => projectService.AddProjects(p));

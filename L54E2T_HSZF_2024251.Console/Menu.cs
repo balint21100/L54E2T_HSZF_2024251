@@ -17,7 +17,7 @@ namespace L54E2T_HSZF_2024251.Console
         {
             int choice = -1;
             string answer = string.Empty;
-            while ((choice != 3))
+            while ((choice != 4))
             {
                 do
                 {
@@ -25,7 +25,8 @@ namespace L54E2T_HSZF_2024251.Console
                     System.Console.WriteLine($"[0] Pharaoh");
                     System.Console.WriteLine($"[1] Project");
                     System.Console.WriteLine($"[2] Worker");
-                    System.Console.WriteLine($"[3] Exit");
+                    System.Console.WriteLine($"[3] Reports");
+                    System.Console.WriteLine($"[4] Exit");
                     System.Console.WriteLine();
                     System.Console.Write("Choice: ");
                     answer = System.Console.ReadLine();
@@ -40,7 +41,7 @@ namespace L54E2T_HSZF_2024251.Console
                             choice = Convert.ToInt32(answer);
                         }
                     }
-                } while (choice < 0 || choice > 3);
+                } while (choice < 0 || choice > 4);
                 switch (choice)
                 {
                     case 0:
@@ -127,7 +128,7 @@ namespace L54E2T_HSZF_2024251.Console
         {
             int choice = -1;
             string answer = string.Empty;
-            while (choice < 0 || choice > 4)
+            while (choice < 0 || choice > 5)
             {
                 System.Console.Clear();
                 System.Console.WriteLine($"{Name} Menu");
@@ -136,7 +137,8 @@ namespace L54E2T_HSZF_2024251.Console
                 System.Console.WriteLine($"[1] | Update {Name}");
                 System.Console.WriteLine($"[2] | Delete {Name}");
                 System.Console.WriteLine($"[3] | Get all the {Name}s");
-                System.Console.WriteLine($"[4] | Exit");
+                System.Console.WriteLine($"[4] | Set {Name}'s Manager");
+                System.Console.WriteLine($"[5] | Exit");
                 System.Console.WriteLine();
                 System.Console.Write("choice: ");
                 answer = System.Console.ReadLine();
@@ -144,7 +146,7 @@ namespace L54E2T_HSZF_2024251.Console
                 {
                     if (answer == "exit")
                     {
-                        choice = 4;
+                        choice = 5;
                     }
                     else
                     {
@@ -166,6 +168,9 @@ namespace L54E2T_HSZF_2024251.Console
                     break;
                 case 3:
                     WorkerMenu.GetWorkers();
+                    break;
+                case 4:
+                    WorkerMenu.SetWorkerManager();
                     break;
             }
 

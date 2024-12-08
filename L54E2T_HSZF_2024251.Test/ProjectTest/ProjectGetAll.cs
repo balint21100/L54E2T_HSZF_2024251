@@ -13,23 +13,23 @@ namespace L54E2T_HSZF_2024251.Test.ProjectTest
     [TestFixture]
     internal class ProjectGetAll
     {
-        private Mock<IProjectDataProvider> projectprov;
+        private Mock<IProjectDataProvider> projectDataProvider;
         private IProjectService projectService;
         private Mock<IPharaohDataProvider> pharaohprov;
         [SetUp]
         public void Init()
         {
-            projectprov = new Mock<IProjectDataProvider>(MockBehavior.Strict);
+            projectDataProvider = new Mock<IProjectDataProvider>(MockBehavior.Strict);
             pharaohprov = new Mock<IPharaohDataProvider>(MockBehavior.Strict);
-            projectService = new ProjectService(projectprov.Object, pharaohprov.Object);
+            projectService = new ProjectService(projectDataProvider.Object, pharaohprov.Object);
 
-            projectprov.Setup(x => x.GetProjects()).Returns(TestData.ProjectsList).Verifiable();
+            projectDataProvider.Setup(x => x.GetProjects()).Returns(TestData.ProjectsList).Verifiable();
         }
         [Test]
-        public void GetAllP()
+        public void GetAllProjects()
         {
             var ProjectList = projectService.GetProjects();
-            projectprov.Verify(x => x.GetProjects(), Times.Once());
+            projectDataProvider.Verify(x => x.GetProjects(), Times.Once());
             Assert.That(() => ProjectList.Count, Is.EqualTo(2));
         }
     }

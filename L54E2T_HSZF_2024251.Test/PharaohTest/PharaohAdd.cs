@@ -21,14 +21,14 @@ namespace L54E2T_HSZF_2024251.Test.PharaohTest
             pharaohprov.Setup(x => x.AddPharaoh(It.IsAny<Pharaohs>())).Returns((Pharaohs x) => x).Verifiable();
         }
         [Test]
-        public void AddTestGood()
+        public void AddPharaohTestGood()
         {
             Pharaohs p = TestData.p;
             pharaohService.AddPharaoh(p);
             pharaohprov.Verify(x => x.AddPharaoh(It.IsAny<Pharaohs>()), Times.Once);
         }
         [Test]
-        public void AddTestBadDate()
+        public void AddPharaohTestBadDate()
         {
             Pharaohs p = TestData.wrongp;
             Assert.Throws<ArgumentException>(() => pharaohService.AddPharaoh(p));
